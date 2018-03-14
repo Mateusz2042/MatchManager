@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Actors\" />
+    <Folder Include="Messages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mongocsharpdriver" Version="2.5.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
+  </ItemGroup>
+
+</Project>

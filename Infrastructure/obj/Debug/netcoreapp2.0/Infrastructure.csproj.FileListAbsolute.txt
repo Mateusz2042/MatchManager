@@ -1,0 +1,9 @@
+c:\users\user\source\repos\MatchManager\Infrastructure\bin\Debug\netcoreapp2.0\Infrastructure.deps.json
+c:\users\user\source\repos\MatchManager\Infrastructure\bin\Debug\netcoreapp2.0\Infrastructure.dll
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.csprojResolveAssemblyReference.cache
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.csproj.CoreCompileInputs.cache
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.AssemblyInfoInputs.cache
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.AssemblyInfo.cs
+c:\users\user\source\repos\MatchManager\Infrastructure\bin\Debug\netcoreapp2.0\Infrastructure.pdb
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.dll
+c:\users\user\source\repos\MatchManager\Infrastructure\obj\Debug\netcoreapp2.0\Infrastructure.pdb
