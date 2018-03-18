@@ -55,8 +55,7 @@ namespace MatchApp.Controllers
 
             return result;
         }
-
-        //Błąd
+        
         [HttpPut]
         public async Task<EditPlayerResponse> EditPlayer(string id, string firstName, string lastName, string nickName, int age, Sex sex)
         {

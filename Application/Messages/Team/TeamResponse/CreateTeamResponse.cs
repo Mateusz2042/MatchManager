@@ -6,5 +6,11 @@ namespace Application.Messages.Team.TeamResponse
 {
     public class CreateTeamResponse
     {
+        public bool Success { get; }
+
+        public CreateTeamResponse(bool success)
+        {
+            Success = success;
+        }
     }
 }

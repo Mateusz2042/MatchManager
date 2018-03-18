@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Akka.Actor;
+using Application.Actors;
+using Application.Messages.Team.TeamRequest;
+using Application.Messages.Team.TeamResponse;
+using MatchManager.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +16,55 @@ namespace MatchApp.Controllers
     [Route("api/Team")]
     public class TeamController : Controller
     {
-        // GET: api/Team
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IActorRef _teamActor;
+        private IActorRef _playerActor;
+
+        public TeamController()
         {
-            return new string[] { "value1", "value2" };
+            _teamActor = ActorModelWrapper.TeamActor;
+            _playerActor = ActorModelWrapper.PlayerActor;
         }
 
-        // GET: api/Team/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet]
+        public async Task<GetAllTeamsResponse> GetAllTeams()
         {
-            return "value";
+            var request = new GetAllTeamsRequest();
+
+            return await _teamActor.Ask<GetAllTeamsResponse>(request);
         }
-        
-        // POST: api/Team
+
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<CreateTeamResponse> CreateTeam(string nameTeam, string idFirstMember, string idSecondMember)
         {
+            var request = new CreateTeamRequest(nameTeam, idFirstMember, idSecondMember);
+
+            return await _teamActor.Ask<CreateTeamResponse>(request);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<GetTeamByIdResponse> GetTeamById(string id)
+        {
+            var request = new GetTeamByIdRequest(id);
+
+            var result = await _teamActor.Ask<GetTeamByIdResponse>(request);
+
+            return result;
         }
         
-        // PUT: api/Team/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public async Task<EditTeamResponse> EditPlayer(string id, string nameTeam, string idFirstMember, string idSecondMember)
         {
+            var request = new EditTeamRequest(id, nameTeam, idFirstMember, idSecondMember);
+
+            return await _teamActor.Ask<EditTeamResponse>(request);
         }
-        
-        // DELETE: api/ApiWithActions/5
+
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<RemoveTeamResponse> RemovePlayer(string id)
         {
+            var request = new RemoveTeamRequest(id);
+
+            return await _teamActor.Ask<RemoveTeamResponse>(request);
         }
     }
 }

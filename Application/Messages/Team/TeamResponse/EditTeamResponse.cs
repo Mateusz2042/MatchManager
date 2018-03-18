@@ -6,5 +6,11 @@ namespace Application.Messages.Team.TeamResponse
 {
     public class EditTeamResponse
     {
+        public bool Success { get; set; }
+
+        public EditTeamResponse(bool success)
+        {
+            Success = success;
+        }
     }
 }

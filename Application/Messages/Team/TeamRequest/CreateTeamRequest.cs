@@ -1,19 +1,18 @@
-﻿using System;
+﻿using MatchManager.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Team.TeamRequest
 {
-    public class EditTeamRequest
+    public class CreateTeamRequest
     {
-        public string Id { get; set; }
         public string NameTeam { get; set; }
         public string IdFirstMember { get; set; }
         public string IdSecondMember { get; set; }
 
-        public EditTeamRequest(string id, string nameTeam, string idFirstMember, string idSecondMember)
+        public CreateTeamRequest(string nameTeam, string idFirstMember, string idSecondMember)
         {
-            Id = id;
             NameTeam = nameTeam;
             IdFirstMember = idFirstMember;
             IdSecondMember = idSecondMember;
