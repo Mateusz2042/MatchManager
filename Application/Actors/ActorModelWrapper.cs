@@ -9,5 +9,6 @@ namespace Application.Actors
     {
         public static IActorRef PlayerActor { get; set; }
         public static IActorRef TeamActor { get; set; }
+        public static IActorRef MatchActor { get; set; }
     }
 }

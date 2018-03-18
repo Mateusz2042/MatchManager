@@ -44,9 +44,11 @@ namespace MatchApp
             //var propsResolver = new AutoFacDependencyResolver(container, system);
             var playerActor = system.ActorOf<PlayerActor>();
             var teamActor = system.ActorOf<TeamActor>();
+            var matchActor = system.ActorOf<MatchActor>();
 
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;
+            ActorModelWrapper.MatchActor = matchActor;
 
             //services.AddSingleton(typeof(ActorSystem), (ServiceProvider) => actorSystem);
 

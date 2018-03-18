@@ -19,9 +19,6 @@ namespace Application.Messages.Team.TeamResponse
 
     public class GetTeamItem
     {
-        private MatchManager.Models.Player firstMember;
-        private MatchManager.Models.Player secondMember;
-
         public string Id { get; set; }
         public string NameTeam { get; set; }
         public MatchManager.Models.Player FirstMember { get; set; }

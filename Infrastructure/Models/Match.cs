@@ -12,7 +12,7 @@ namespace MatchManager.Models
     {
         public Team FirstTeam { get; set; }
         public Team SecondTeam { get; set; }
-        public DateTime DateTimeMatch { get; set; }
+        public string DateTimeMatch { get; set; }
         public int ScoreOfFirstTeam { get; set; }
         public int ScoreOfSecondTeam { get; set; }
     }

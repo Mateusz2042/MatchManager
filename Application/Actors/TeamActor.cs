@@ -85,6 +85,7 @@ namespace Application.Actors
                             FirstMember = GetPlayerById(request.IdFirstMember),
                             SecondMember = GetPlayerById(request.IdSecondMember)
                         });
+
                         var response = new CreateTeamResponse(true);
                         Sender.Tell(response);
                     }

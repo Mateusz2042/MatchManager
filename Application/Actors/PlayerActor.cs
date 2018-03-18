@@ -75,7 +75,15 @@ namespace Application.Actors
                 if (CheckInputs(firstName: request.FirstName, lastName: request.LastName, nickName: request.NickName,
                                 age: request.Age, sex: request.Sex))
                 {
-                    _playerRepo.Insert(new Player { FirstName = request.FirstName, LastName = request.LastName, NickName = request.NickName, Age = request.Age, Sex = request.Sex});
+                    _playerRepo.Insert(new Player
+                    {
+                        FirstName = request.FirstName,
+                        LastName = request.LastName,
+                        NickName = request.NickName,
+                        Age = request.Age,
+                        Sex = request.Sex
+                    });
+
                     var response = new CreatePlayerResponse(true);
                     Sender.Tell(response);
                 }

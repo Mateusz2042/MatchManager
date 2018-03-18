@@ -52,7 +52,7 @@ namespace MatchApp.Controllers
         }
         
         [HttpPut]
-        public async Task<EditTeamResponse> EditPlayer(string id, string nameTeam, string idFirstMember, string idSecondMember)
+        public async Task<EditTeamResponse> EditTeam(string id, string nameTeam, string idFirstMember, string idSecondMember)
         {
             var request = new EditTeamRequest(id, nameTeam, idFirstMember, idSecondMember);
 
@@ -60,7 +60,7 @@ namespace MatchApp.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<RemoveTeamResponse> RemovePlayer(string id)
+        public async Task<RemoveTeamResponse> RemoveTeam(string id)
         {
             var request = new RemoveTeamRequest(id);
 

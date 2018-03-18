@@ -6,5 +6,11 @@ namespace Application.Messages.Match.MatchResponse
 {
     public class CreateMatchResponse
     {
+        public bool Success { get; }
+
+        public CreateMatchResponse(bool success)
+        {
+            Success = success;
+        }
     }
 }
