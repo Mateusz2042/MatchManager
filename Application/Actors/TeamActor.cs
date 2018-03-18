@@ -72,10 +72,22 @@ namespace Application.Actors
             {
                 if (!String.IsNullOrEmpty(request.NameTeam) || !String.IsNullOrEmpty(request.IdFirstMember) || !String.IsNullOrEmpty(request.IdSecondMember))
                 {
-                    _teamRepo.Insert(new Team { NameTeam = request.NameTeam, FirstMember = GetPlayerById(request.IdFirstMember), SecondMember = GetPlayerById(request.IdSecondMember)
-                });
-                    var response = new CreateTeamResponse(true);
-                    Sender.Tell(response);
+                    if (_teamRepo.Any(x => x.NameTeam.Contains(request.NameTeam)))
+                    {
+                        var response = new CreateTeamResponse(false);
+                        Sender.Tell(response);
+                    }
+                    else
+                    {
+                        _teamRepo.Insert(new Team
+                        {
+                            NameTeam = request.NameTeam,
+                            FirstMember = GetPlayerById(request.IdFirstMember),
+                            SecondMember = GetPlayerById(request.IdSecondMember)
+                        });
+                        var response = new CreateTeamResponse(true);
+                        Sender.Tell(response);
+                    }
                 }
                 else
                 {
