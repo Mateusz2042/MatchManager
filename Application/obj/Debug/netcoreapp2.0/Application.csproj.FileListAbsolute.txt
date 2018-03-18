@@ -7,3 +7,5 @@ c:\users\user\source\repos\MatchManager\Application\obj\Debug\netcoreapp2.0\Appl
 c:\users\user\source\repos\MatchManager\Application\bin\Debug\netcoreapp2.0\Application.pdb
 c:\users\user\source\repos\MatchManager\Application\obj\Debug\netcoreapp2.0\Application.dll
 c:\users\user\source\repos\MatchManager\Application\obj\Debug\netcoreapp2.0\Application.pdb
+C:\Users\user\source\repos\MatchManager\Application\bin\Debug\netcoreapp2.0\Infrastructure.dll
+C:\Users\user\source\repos\MatchManager\Application\bin\Debug\netcoreapp2.0\Infrastructure.pdb

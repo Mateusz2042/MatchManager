@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Actors\" />
-    <Folder Include="Messages\" />
+    <PackageReference Include="Akka" Version="1.3.5" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="DotNetCore.MongoDB.Repository" Version="1.0.2.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="mongocsharpdriver" Version="2.5.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

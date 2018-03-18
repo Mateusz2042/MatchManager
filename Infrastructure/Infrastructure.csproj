@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="mongocsharpdriver" Version="2.5.0" />
+    <PackageReference Include="DotNetCore.MongoDB.Repository" Version="1.0.2.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
   </ItemGroup>
 

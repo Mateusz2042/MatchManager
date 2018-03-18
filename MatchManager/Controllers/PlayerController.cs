@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MatchManager.Controllers
 {
-    public class HomeController : Controller
+    public class PlayerController : Controller
     {
         public IActionResult Index()
         {

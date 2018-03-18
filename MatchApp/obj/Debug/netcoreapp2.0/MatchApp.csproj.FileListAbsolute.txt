@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\MatchApp.deps.json
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\MatchApp.runtimeconfig.json
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\MatchApp.runtimeconfig.dev.json
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\MatchApp.dll
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\MatchApp.pdb
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.csprojResolveAssemblyReference.cache
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.AssemblyInfo.cs
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.dll
+C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.pdb
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Infrastructure.dll
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Infrastructure.pdb
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Application.dll
+C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Application.pdb
