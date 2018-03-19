@@ -23,13 +23,15 @@ namespace Application.Messages.Team.TeamResponse
         public string NameTeam { get; set; }
         public MatchManager.Models.Player FirstMember { get; set; }
         public MatchManager.Models.Player SecondMember { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public GetTeamItem(string id, string nameTeam, MatchManager.Models.Player firstMember, MatchManager.Models.Player secondMember)
+        public GetTeamItem(string id, string nameTeam, MatchManager.Models.Player firstMember, MatchManager.Models.Player secondMember, bool isDeleted)
         {
             Id = id;
             NameTeam = nameTeam;
             FirstMember = firstMember;
             SecondMember = secondMember;
+            IsDeleted = isDeleted;
         }
     }
 }

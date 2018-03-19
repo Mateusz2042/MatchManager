@@ -1,10 +1,13 @@
-﻿using MatchManager.Enums;
+﻿using FluentValidation.Attributes;
+using Infrastructure.Validator.PlayerValidator;
+using MatchManager.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Player.PlayerRequest
 {
+    [Validator(typeof(PlayerValidator))]
     public class CreatePlayerRequest
     {
         public string FirstName { get; set; }

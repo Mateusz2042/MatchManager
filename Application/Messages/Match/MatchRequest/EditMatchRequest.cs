@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Application.Validator.MatchValidator;
+using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Match.MatchRequest
 {
+    [Validator(typeof(EditMatchValidator))]
     public class EditMatchRequest
     {
         public string Id { get; set; }

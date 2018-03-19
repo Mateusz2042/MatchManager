@@ -1,6 +1,7 @@
 ﻿using Akka.Actor;
 using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
+using Application.Specifications.PlayerSpecifications;
 using AutoMapper;
 using DotNETCore.Repository.Mongo;
 using MatchManager.Enums;
@@ -32,7 +33,9 @@ namespace Application.Actors
         {
             try
             {
-                var players = _playerRepo.FindAll().Where(x => !x.IsDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted));
+                var notDeleted = new GetPlayersNotDeletedSpecifications();
+
+                var players = _playerRepo.Find(notDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted));
 
                 var response = new GetAllPlayersResponse(players);
                 Sender.Tell(response);

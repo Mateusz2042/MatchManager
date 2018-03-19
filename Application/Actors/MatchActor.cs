@@ -2,6 +2,7 @@
 using Application.Messages.Match.MatchRequest;
 using Application.Messages.Match.MatchResponse;
 using Application.Messages.Team.TeamResponse;
+using Application.Specifications.MatchSpecifications;
 using DotNETCore.Repository.Mongo;
 using MatchManager.Models;
 using System;
@@ -33,7 +34,9 @@ namespace Application.Actors
         {
             try
             {
-                var matches = _matchRepo.FindAll().Select(x => new GetMatchItem(x.Id, x.FirstTeam, x.SecondTeam, x.DateTimeMatch, x.ScoreOfFirstTeam, x.ScoreOfSecondTeam));
+                var notDeleted = new GetMatchesNotDeletedSpecifications();
+
+                var matches = _matchRepo.Find(notDeleted).Select(x => new GetMatchItem(x.Id, x.FirstTeam, x.SecondTeam, x.DateTimeMatch, x.ScoreOfFirstTeam, x.ScoreOfSecondTeam, x.IsDeleted));
 
                 var response = new GetAllMatchesResponse(matches);
                 Sender.Tell(response);
@@ -80,7 +83,8 @@ namespace Application.Actors
                         SecondTeam = GetTeamById(request.IdSecondTeam),
                         DateTimeMatch = request.DateTimeMatch,
                         ScoreOfFirstTeam = 0,
-                        ScoreOfSecondTeam = 0
+                        ScoreOfSecondTeam = 0,
+                        IsDeleted = false
                     });
 
                     var response = new CreateMatchResponse(true);
@@ -103,7 +107,13 @@ namespace Application.Actors
         {
             try
             {
-                _matchRepo.Delete(request.Id);
+                //_matchRepo.Delete(request.Id);
+
+                var match = _matchRepo.Get(request.Id);
+
+                match.IsDeleted = true;
+
+                _matchRepo.Replace(match);
 
                 var response = new RemoveMatchResponse(true);
                 Sender.Tell(response);
@@ -158,7 +168,8 @@ namespace Application.Actors
                         SecondTeam = GetTeamById(secondTeam.Id),
                         DateTimeMatch = request.DateTimeMatch,
                         ScoreOfFirstTeam = 0,
-                        ScoreOfSecondTeam = 0
+                        ScoreOfSecondTeam = 0,
+                        IsDeleted = false
                     });
 
                     var response = new CreateRandomMatchResponse(true);
@@ -186,7 +197,7 @@ namespace Application.Actors
 
         public GetTeamItem GetRandomTeam()
         {
-            var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember)).ToArray();
+            var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted)).ToArray();
 
             Random rand = new Random();
 

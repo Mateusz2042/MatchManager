@@ -13,5 +13,6 @@ namespace MatchManager.Models
         public string NameTeam { get; set; }
         public Player FirstMember { get; set; }
         public Player SecondMember { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

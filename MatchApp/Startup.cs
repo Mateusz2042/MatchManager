@@ -52,6 +52,7 @@ namespace MatchApp
 
             //services.AddSingleton(typeof(ActorSystem), (ServiceProvider) => actorSystem);
 
+            services.AddResponseCaching();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "MatchApp Api", Version = "v1"});
@@ -75,6 +76,8 @@ namespace MatchApp
             }
 
             app.UseMvc();
+
+            app.UseResponseCaching();
 
             app.UseSwagger();
 

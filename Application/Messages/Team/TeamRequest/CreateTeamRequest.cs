@@ -1,10 +1,13 @@
-﻿using MatchManager.Enums;
+﻿using FluentValidation.Attributes;
+using Infrastructure.Validator.TeamValidator;
+using MatchManager.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Team.TeamRequest
 {
+    [Validator(typeof(TeamValidator))]
     public class CreateTeamRequest
     {
         public string NameTeam { get; set; }

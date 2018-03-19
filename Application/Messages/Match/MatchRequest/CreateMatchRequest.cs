@@ -1,9 +1,12 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using Infrastructure.Validator.MatchValidator;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Match.MatchRequest
 {
+    [Validator(typeof(MatchValidator))]
     public class CreateMatchRequest
     {
         public string IdFirstTeam { get; set; }

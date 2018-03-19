@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="DotNetCore.MongoDB.Repository" Version="1.0.2.2" />
+    <PackageReference Include="FluentValidation" Version="7.5.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
   </ItemGroup>
 

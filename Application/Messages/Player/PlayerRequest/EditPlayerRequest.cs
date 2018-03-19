@@ -1,4 +1,6 @@
 ﻿using Application.Messages.Player.PlayerResponse;
+using Application.Validator.PlayerValidator;
+using FluentValidation.Attributes;
 using MatchManager.Enums;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Text;
 
 namespace Application.Messages.Player.PlayerRequest
 {
+    [Validator(typeof(EditPlayerValidator))]
     public class EditPlayerRequest
     {
         public string Id { get; set; }

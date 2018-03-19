@@ -24,6 +24,11 @@ namespace Application.Specifications
         {
             return new NotSpecification<T>(this, specification);
         }
+
+        public static implicit operator Expression<Func<T, bool>> (Specification<T> specification)
+        {
+            return specification.ToExpression();
+        }
     }
 
     public class AndSpecification<T> : Specification<T>

@@ -15,5 +15,6 @@ namespace MatchManager.Models
         public string DateTimeMatch { get; set; }
         public int ScoreOfFirstTeam { get; set; }
         public int ScoreOfSecondTeam { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

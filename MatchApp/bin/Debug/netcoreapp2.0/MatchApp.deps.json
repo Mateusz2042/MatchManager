@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "b20286e394efe76fb77219570c423345de745afb"
+    "signature": "42644215e663dc3164e87110c0bde473a9daba4a"
   },
   "compilationOptions": {
     "defines": [
@@ -159,6 +159,19 @@
         },
         "compile": {
           "lib/netcoreapp1.1/DotNetCore.MongoDB.Repository.dll": {}
+        }
+      },
+      "FluentValidation/7.5.2": {
+        "dependencies": {
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel.Annotations": "4.4.1",
+          "System.ComponentModel.Primitives": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentValidation.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -1048,7 +1061,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.0.2",
           "Microsoft.Extensions.Localization": "2.0.1",
-          "System.ComponentModel.Annotations": "4.4.0"
+          "System.ComponentModel.Annotations": "4.4.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.DataAnnotations.dll": {}
@@ -1735,7 +1748,7 @@
           "Microsoft.Extensions.Logging": "2.0.0",
           "Remotion.Linq": "2.1.1",
           "System.Collections.Immutable": "1.4.0",
-          "System.ComponentModel.Annotations": "4.4.0",
+          "System.ComponentModel.Annotations": "4.4.1",
           "System.Diagnostics.DiagnosticSource": "4.4.1",
           "System.Interactive.Async": "3.1.1"
         },
@@ -2107,7 +2120,7 @@
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.0.1",
           "Microsoft.Extensions.Logging": "2.0.0",
           "Microsoft.Extensions.Options": "2.0.0",
-          "System.ComponentModel.Annotations": "4.4.0"
+          "System.ComponentModel.Annotations": "4.4.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.dll": {}
@@ -2120,7 +2133,7 @@
         "dependencies": {
           "Microsoft.Extensions.Identity.Core": "2.0.1",
           "Microsoft.Extensions.Logging": "2.0.0",
-          "System.ComponentModel.Annotations": "4.4.0"
+          "System.ComponentModel.Annotations": "4.4.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.dll": {}
@@ -3068,7 +3081,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.ComponentModel.Annotations/4.4.0": {},
+      "System.ComponentModel.Annotations/4.4.1": {},
       "System.ComponentModel.Primitives/4.3.0": {
         "dependencies": {
           "System.ComponentModel": "4.3.0",
@@ -4438,6 +4451,7 @@
       "Infrastructure/1.0.0": {
         "dependencies": {
           "DotNetCore.MongoDB.Repository": "1.0.2.2",
+          "FluentValidation": "7.5.2",
           "MongoDB.Driver": "2.5.0"
         },
         "runtime": {
@@ -4679,6 +4693,13 @@
       "sha512": "sha512-CmuygdOD/bFtp+R3jnnghAReUbnSREwqP9jNcHoKyZD2qlVMeUVcX2eDVv61x4QdNzNiiPxeaqXwyBq8EJXmpA==",
       "path": "dotnetcore.mongodb.repository/1.0.2.2",
       "hashPath": "dotnetcore.mongodb.repository.1.0.2.2.nupkg.sha512"
+    },
+    "FluentValidation/7.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AQMyeK9eP0+EKBsBuO6RhAiTmyTC32is6EX+cAMBOSCMvExeohtg3vNM1xUoenpb1mjwZfuoJXLz7QfiC7Bn2A==",
+      "path": "fluentvalidation/7.5.2",
+      "hashPath": "fluentvalidation.7.5.2.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
@@ -6220,12 +6241,12 @@
       "path": "system.componentmodel/4.3.0",
       "hashPath": "system.componentmodel.4.3.0.nupkg.sha512"
     },
-    "System.ComponentModel.Annotations/4.4.0": {
+    "System.ComponentModel.Annotations/4.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-29K3DQ+IGU7LBaMjTo7SI7T7X/tsMtLvz1p56LJ556Iu0Dw3pKZw5g8yCYCWMRxrOF0Hr0FU0FwW0o42y2sb3A==",
-      "path": "system.componentmodel.annotations/4.4.0",
-      "hashPath": "system.componentmodel.annotations.4.4.0.nupkg.sha512"
+      "sha512": "sha512-ToiYqSCioqhtspq2O/jYKtyTC/T0uwWHBTYlzCi6PRbSSHArN1IaRWeHffDamvms5sye5FDUWCfNZgubQpNRsA==",
+      "path": "system.componentmodel.annotations/4.4.1",
+      "hashPath": "system.componentmodel.annotations.4.4.1.nupkg.sha512"
     },
     "System.ComponentModel.Primitives/4.3.0": {
       "type": "package",

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Application.Validator.TeamValidator;
+using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Messages.Team.TeamRequest
 {
+    [Validator(typeof(EditTeamValidator))]
     public class EditTeamRequest
     {
         public string Id { get; set; }

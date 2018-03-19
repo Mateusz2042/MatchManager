@@ -1,6 +1,7 @@
 ﻿using Akka.Actor;
 using Application.Messages.Team.TeamRequest;
 using Application.Messages.Team.TeamResponse;
+using Application.Specifications.TeamSpecifications;
 using DotNETCore.Repository.Mongo;
 using MatchManager.Models;
 using System;
@@ -31,7 +32,9 @@ namespace Application.Actors
         {
             try
             {
-                var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember));
+                var notDeleted = new GetTeamsNotDeletedSpecifications();
+
+                var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted));
 
                 var response = new GetAllTeamsResponse(teams);
                 Sender.Tell(response);
@@ -83,7 +86,8 @@ namespace Application.Actors
                         {
                             NameTeam = request.NameTeam,
                             FirstMember = GetPlayerById(request.IdFirstMember),
-                            SecondMember = GetPlayerById(request.IdSecondMember)
+                            SecondMember = GetPlayerById(request.IdSecondMember),
+                            IsDeleted = false
                         });
 
                         var response = new CreateTeamResponse(true);
@@ -107,7 +111,13 @@ namespace Application.Actors
         {
             try
             {
-                _teamRepo.Delete(request.Id);
+                //_teamRepo.Delete(request.Id);
+
+                var team = _teamRepo.Get(request.Id);
+
+                team.IsDeleted = true;
+
+                _teamRepo.Replace(team);
 
                 var response = new RemoveTeamResponse(true);
                 Sender.Tell(response);

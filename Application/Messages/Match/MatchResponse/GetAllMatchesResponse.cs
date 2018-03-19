@@ -23,8 +23,9 @@ namespace Application.Messages.Match.MatchResponse
         public string DateTimeMatch { get; set; }
         public int ScoreOfFirstTeam { get; set; }
         public int ScoreOfSecondTeam { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public GetMatchItem(string id, MatchManager.Models.Team firstTeam, MatchManager.Models.Team secondTeam, string dateTimeMatch, int scoreOfFirstTeam, int scoreOfSecondTeam)
+        public GetMatchItem(string id, MatchManager.Models.Team firstTeam, MatchManager.Models.Team secondTeam, string dateTimeMatch, int scoreOfFirstTeam, int scoreOfSecondTeam, bool isDeleted)
         {
             Id = id;
             FirstTeam = firstTeam;
@@ -32,6 +33,7 @@ namespace Application.Messages.Match.MatchResponse
             DateTimeMatch = dateTimeMatch;
             ScoreOfFirstTeam = scoreOfFirstTeam;
             ScoreOfSecondTeam = scoreOfSecondTeam;
+            IsDeleted = isDeleted;
         }
     }
 }
