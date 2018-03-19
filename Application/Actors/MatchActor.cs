@@ -1,6 +1,7 @@
 ﻿using Akka.Actor;
 using Application.Messages.Match.MatchRequest;
 using Application.Messages.Match.MatchResponse;
+using Application.Messages.Team.TeamResponse;
 using DotNETCore.Repository.Mongo;
 using MatchManager.Models;
 using System;
@@ -25,6 +26,7 @@ namespace Application.Actors
             Receive<CreateMatchRequest>(message => Handle(message));
             Receive<RemoveMatchRequest>(message => Handle(message));
             Receive<EditMatchRequest>(message => Handle(message));
+            Receive<CreateRandomMatchRequest>(message => Handle(message));
         }
 
         public void Handle(GetAllMatchesRequest request)
@@ -135,11 +137,62 @@ namespace Application.Actors
                 Sender.Tell(response);
             }
         }
+
+        public void Handle(CreateRandomMatchRequest request)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(request.DateTimeMatch.ToString()))
+                {
+                    var firstTeam = GetRandomTeam();
+                    var secondTeam = GetRandomTeam();
+
+                    while (firstTeam.Id == secondTeam.Id)
+                    {
+                        secondTeam = GetRandomTeam();
+                    }
+
+                    _matchRepo.Insert(new Match
+                    {
+                        FirstTeam = GetTeamById(firstTeam.Id),
+                        SecondTeam = GetTeamById(secondTeam.Id),
+                        DateTimeMatch = request.DateTimeMatch,
+                        ScoreOfFirstTeam = 0,
+                        ScoreOfSecondTeam = 0
+                    });
+
+                    var response = new CreateRandomMatchResponse(true);
+                    Sender.Tell(response);
+                }
+                else
+                {
+                    var response = new CreateRandomMatchResponse(false);
+                    Sender.Tell(response);
+                }
+            }
+            catch (Exception)
+            {
+                var response = new CreateRandomMatchResponse(false);
+                Sender.Tell(response);
+            }
+        }
+
         #region Data
 
         public Team GetTeamById(string id)
         {
             return _teamRepo.Get(id);
+        }
+
+        public GetTeamItem GetRandomTeam()
+        {
+            var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember)).ToArray();
+
+            Random rand = new Random();
+
+            var y = rand.Next(0, teams.Length);
+
+            return teams[y];
         }
 
         #endregion

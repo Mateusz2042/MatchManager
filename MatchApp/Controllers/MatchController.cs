@@ -66,5 +66,13 @@ namespace MatchApp.Controllers
 
             return await _matchActor.Ask<RemoveMatchResponse>(request);
         }
+
+        //[HttpPost]
+        //public async Task<CreateRandomMatchResponse> CreateRandomMatch(string dateTimeMatch)
+        //{
+        //    var request = new CreateRandomMatchRequest(dateTimeMatch);
+
+        //    return await _matchActor.Ask<CreateRandomMatchResponse>(request);
+        //}
     }
 }
