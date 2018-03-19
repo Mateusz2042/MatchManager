@@ -24,6 +24,7 @@ namespace MatchApp.Controllers
             _teamActor = ActorModelWrapper.TeamActor;
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet]
         public async Task<GetAllMatchesResponse> GetAllMatches()
         {
@@ -32,6 +33,7 @@ namespace MatchApp.Controllers
             return await _matchActor.Ask<GetAllMatchesResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpPost]
         public async Task<CreateMatchResponse> CreateMatch(string idFirstTeam, string idSecondTeam, string dateTimeMatch)
         {
@@ -41,6 +43,7 @@ namespace MatchApp.Controllers
             return await _matchActor.Ask<CreateMatchResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet("{id}")]
         public async Task<GetMatchByIdResponse> GetMatchById(string id)
         {
@@ -51,6 +54,7 @@ namespace MatchApp.Controllers
             return result;
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpPut]
         public async Task<EditMatchResponse> EditMatch(string id, string idFirstTeam, string idSecondTeam, string dateTimeMatch, int scoreOfFirstTeam, int scoreOfSecondTeam)
         {
@@ -59,6 +63,7 @@ namespace MatchApp.Controllers
             return await _matchActor.Ask<EditMatchResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpDelete("{id}")]
         public async Task<RemoveMatchResponse> RemoveMatch(string id)
         {
@@ -67,6 +72,7 @@ namespace MatchApp.Controllers
             return await _matchActor.Ask<RemoveMatchResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [Route("/CreateRandomMatch")]
         [HttpPost]
         public async Task<CreateRandomMatchResponse> CreateRandomMatch(string dateTimeMatch)

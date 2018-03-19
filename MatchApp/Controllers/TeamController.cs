@@ -25,6 +25,7 @@ namespace MatchApp.Controllers
             _playerActor = ActorModelWrapper.PlayerActor;
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet]
         public async Task<GetAllTeamsResponse> GetAllTeams()
         {
@@ -33,6 +34,7 @@ namespace MatchApp.Controllers
             return await _teamActor.Ask<GetAllTeamsResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpPost]
         public async Task<CreateTeamResponse> CreateTeam(string nameTeam, string idFirstMember, string idSecondMember)
         {
@@ -41,6 +43,7 @@ namespace MatchApp.Controllers
             return await _teamActor.Ask<CreateTeamResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet("{id}")]
         public async Task<GetTeamByIdResponse> GetTeamById(string id)
         {
@@ -50,7 +53,8 @@ namespace MatchApp.Controllers
 
             return result;
         }
-        
+
+        [ResponseCache(Duration = 60)]
         [HttpPut]
         public async Task<EditTeamResponse> EditTeam(string id, string nameTeam, string idFirstMember, string idSecondMember)
         {
@@ -59,6 +63,7 @@ namespace MatchApp.Controllers
             return await _teamActor.Ask<EditTeamResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpDelete("{id}")]
         public async Task<RemoveTeamResponse> RemoveTeam(string id)
         {

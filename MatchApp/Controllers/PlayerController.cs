@@ -24,6 +24,7 @@ namespace MatchApp.Controllers
             _playerActor = ActorModelWrapper.PlayerActor;
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet]
         public async Task<GetAllPlayersResponse> GetAllPlayers()
         {
@@ -34,6 +35,7 @@ namespace MatchApp.Controllers
             return await _playerActor.Ask<GetAllPlayersResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpPost]
         public async Task<CreatePlayerResponse> CreatePlayer(string firstName, string lastName, string nickName, int age, Sex sex)
         {
@@ -44,6 +46,7 @@ namespace MatchApp.Controllers
             return await _playerActor.Ask<CreatePlayerResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet("{id}")]
         public async Task<GetPlayerByIdResponse> GetPlayerById(string id)
         {
@@ -55,7 +58,8 @@ namespace MatchApp.Controllers
 
             return result;
         }
-        
+
+        [ResponseCache(Duration = 60)]
         [HttpPut]
         public async Task<EditPlayerResponse> EditPlayer(string id, string firstName, string lastName, string nickName, int age, Sex sex)
         {
@@ -66,6 +70,7 @@ namespace MatchApp.Controllers
             return await _playerActor.Ask<EditPlayerResponse>(request);
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpDelete("{id}")]
         public async Task<RemovePlayerResponse> RemovePlayer(string id)
         {

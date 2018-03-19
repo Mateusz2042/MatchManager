@@ -16,5 +16,6 @@ namespace MatchManager.Models
         public string NickName { get; set; }
         public int Age { get; set; }
         public Sex Sex { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

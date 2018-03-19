@@ -32,7 +32,7 @@ namespace Application.Actors
         {
             try
             {
-                var players = _playerRepo.FindAll().Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex));
+                var players = _playerRepo.FindAll().Where(x => !x.IsDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted));
 
                 var response = new GetAllPlayersResponse(players);
                 Sender.Tell(response);
@@ -81,7 +81,8 @@ namespace Application.Actors
                         LastName = request.LastName,
                         NickName = request.NickName,
                         Age = request.Age,
-                        Sex = request.Sex
+                        Sex = request.Sex,
+                        IsDeleted = false
                     });
 
                     var response = new CreatePlayerResponse(true);
@@ -104,7 +105,13 @@ namespace Application.Actors
         {
             try
             {
-                _playerRepo.Delete(request.Id);
+                //_playerRepo.Delete(request.Id);
+
+                var player = _playerRepo.Get(request.Id);
+
+                player.IsDeleted = true;
+
+                _playerRepo.Replace(player);
 
                 var response = new RemovePlayerResponse(true);
                 Sender.Tell(response);
