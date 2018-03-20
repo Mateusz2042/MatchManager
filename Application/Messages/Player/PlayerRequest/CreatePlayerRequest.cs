@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Messages.Player.PlayerRequest
 {
-    [Validator(typeof(PlayerValidator))]
+    [Validator(typeof(PlayerValidatorr))]
     public class CreatePlayerRequest
     {
         public string FirstName { get; set; }

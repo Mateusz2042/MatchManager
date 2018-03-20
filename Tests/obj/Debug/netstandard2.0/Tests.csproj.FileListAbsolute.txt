@@ -1,9 +1,0 @@
-C:\Users\user\source\repos\MatchManager\Tests\bin\Debug\netstandard2.0\Tests.deps.json
-C:\Users\user\source\repos\MatchManager\Tests\bin\Debug\netstandard2.0\Tests.dll
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.csprojResolveAssemblyReference.cache
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.csproj.CoreCompileInputs.cache
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.AssemblyInfoInputs.cache
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.AssemblyInfo.cs
-C:\Users\user\source\repos\MatchManager\Tests\bin\Debug\netstandard2.0\Tests.pdb
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.dll
-C:\Users\user\source\repos\MatchManager\Tests\obj\Debug\netstandard2.0\Tests.pdb

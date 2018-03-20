@@ -7,9 +7,9 @@ using MatchManager.Models;
 
 namespace Infrastructure.Validator.PlayerValidator
 {
-    public class PlayerValidator: AbstractValidator<CreatePlayerRequest>
+    public class PlayerValidatorr: AbstractValidator<CreatePlayerRequest>
     {
-        public PlayerValidator()
+        public PlayerValidatorr()
         {
             RuleFor(player => player.FirstName).NotEmpty().WithMessage("FirstName is required");
             RuleFor(player => player.LastName).NotEmpty().WithMessage("LastName is required");
