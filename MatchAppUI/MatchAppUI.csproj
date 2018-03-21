@@ -13,4 +13,23 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\materialize\css\materialize.css" />
+    <None Include="wwwroot\materialize\css\materialize.min.css" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Bold.woff" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Bold.woff2" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Light.woff" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Light.woff2" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Medium.woff" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Medium.woff2" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Regular.woff" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Regular.woff2" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Thin.woff" />
+    <None Include="wwwroot\materialize\fonts\roboto\Roboto-Thin.woff2" />
+    <None Include="wwwroot\materialize\js\materialize.js" />
+    <None Include="wwwroot\materialize\js\materialize.min.js" />
+    <None Include="wwwroot\materialize\LICENSE" />
+    <None Include="wwwroot\materialize\README.md" />
+  </ItemGroup>
+
 </Project>
