@@ -13,6 +13,8 @@ using MatchApp.Settings;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,6 +36,20 @@ namespace MatchApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowApi",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    });
+            });
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowApi"));
+            });
 
             //ContainerBuilder builder = new ContainerBuilder();
             //var repoPlayer = builder.RegisterGeneric(typeof(Repository<>))
@@ -67,6 +83,7 @@ namespace MatchApp
                 c.SwaggerDoc("v1", new Info { Title = "MatchApp Api", Version = "v1"});
             });
 
+
             //services.Configure<SettingsConnection>(options =>
             //{
             //    options.ConnectionString
@@ -93,6 +110,8 @@ namespace MatchApp
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MatchApp Api v1");
             });
+
+            app.UseCors("AllowApi");
         }
     }
 }
