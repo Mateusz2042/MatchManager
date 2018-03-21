@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Tests.TestDataGenerator;
 
 namespace Tests.PlayerActorTest
 {
@@ -51,6 +52,19 @@ namespace Tests.PlayerActorTest
 
                 Assert.False(result);
             }
+        }
+
+        [Theory]
+        [ClassData(typeof(TestDataGenerator.TestDataGenerator))]
+        public void CreatePlayerActorTestPassedVer2(Player player, bool expected)
+        {
+            var identity = Sys.ActorOf(Props.Create(() => new PlayerActorValidator()));
+
+            identity.Tell(new PlayerValidatorRequest(player));
+
+            var result = ExpectMsg<PlayerValidatorResponse>().Success;
+
+            Assert.Equal(expected, result);
         }
 
         [Fact]
