@@ -9,12 +9,14 @@ using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
 using MatchManager.Enums;
 using MatchManager.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatchApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/Player")]
+    [EnableCors("AllowApi")]
     public class PlayerController : Controller
     {
         private IActorRef _playerActor;

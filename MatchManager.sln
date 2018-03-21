@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchApp", "MatchApp\MatchA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{93233D35-46E9-4EBE-9E85-384989654FAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchAppUI", "MatchAppUI\MatchAppUI.csproj", "{80C63E8A-0A4B-49A8-B778-E0637538A935}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{93233D35-46E9-4EBE-9E85-384989654FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93233D35-46E9-4EBE-9E85-384989654FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93233D35-46E9-4EBE-9E85-384989654FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C63E8A-0A4B-49A8-B778-E0637538A935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C63E8A-0A4B-49A8-B778-E0637538A935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C63E8A-0A4B-49A8-B778-E0637538A935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C63E8A-0A4B-49A8-B778-E0637538A935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
