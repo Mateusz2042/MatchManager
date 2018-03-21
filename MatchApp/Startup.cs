@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.DI.AutoFac;
 using Akka.DI.Core;
+using Akka.Routing;
 using Application.Actors;
 using Autofac;
 using DotNETCore.Repository.Mongo;
@@ -42,9 +43,17 @@ namespace MatchApp
 
             var system = ActorSystem.Create("MyActor");
             //var propsResolver = new AutoFacDependencyResolver(container, system);
-            var playerActor = system.ActorOf<PlayerActor>();
-            var teamActor = system.ActorOf<TeamActor>();
-            var matchActor = system.ActorOf<MatchActor>();
+
+            //tworzenie ilości możliwych dzieci aktorów, tutaj 10
+            var propsPlayer = Props.Create<PlayerActor>().WithRouter(new RoundRobinPool(10));
+            var propsTeam = Props.Create<TeamActor>().WithRouter(new RoundRobinPool(10));
+            var propsMatch = Props.Create<MatchActor>().WithRouter(new RoundRobinPool(10));
+
+            var playerActor = system.ActorOf(propsPlayer, "playerActor");
+            var teamActor = system.ActorOf(propsTeam, "teamActor");
+            var matchActor = system.ActorOf(propsMatch, "matchActor");
+
+            //var matchActor = system.ActorOf<MatchActor>();
 
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Application.Actors
 {
@@ -73,6 +74,10 @@ namespace Application.Actors
 
         private void Handle(CreatePlayerRequest request)
         {
+            //throw new Exception();
+            //Thread.Sleep(TimeSpan.FromSeconds(30)); - test aby sprawdzić, czy zrobi się dziecko aktora
+            //tzn. że wiele osob będzie mogło w tym samym czasie korzystać z aplikacji
+
             try
             {
                 if (CheckInputs(firstName: request.FirstName, lastName: request.LastName, nickName: request.NickName,
