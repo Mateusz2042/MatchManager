@@ -13,13 +13,6 @@ namespace Tests.PlayerActorTest
 {
     public class PlayerActorTest : TestKit
     {
-        List<Player> playersPassed = new List<Player>()
-        {
-            new Player{FirstName = "Mateusz", LastName = "Nowak", NickName = "Mat", Age = 23, Sex = Sex.Male, IsDeleted = false},
-            new Player{FirstName = "Kasia", LastName = "Kowalska", NickName = "Kao", Age = 22, Sex = Sex.Female, IsDeleted = false},
-            new Player{FirstName = "Jan", LastName = "Nowy", NickName = "Jano", Age = 20, Sex = Sex.Male, IsDeleted = false},
-        };
-
         List<Player> playersFailed = new List<Player>()
         {
             new Player{FirstName = "", LastName = "Nowak", NickName = "Mat", Age = 23, Sex = Sex.Male, IsDeleted = false},
@@ -28,19 +21,21 @@ namespace Tests.PlayerActorTest
             new Player{FirstName = "Marcin", LastName = "Wojtowski", NickName = "MR", Age = 10, Sex = Sex.Male, IsDeleted = false}
         };
 
-        [Fact]
-        public void CreatePlayerActorTestPassed()
+        [Theory]
+        [InlineData("Mateusz", "Nowak", "Mat", 23, Sex.Male, false)]
+        [InlineData("Kasia", "Kowalska", "Kao", 18, Sex.Female, false)]
+        [InlineData("Jan", "Nowy", "Jano", 20, Sex.Male, false)]
+        public void CreatePlayerActorTestPassed(string firstName, string lastName, string nickName, int age, Sex sex, bool isDeleted)
         {
             var identity = Sys.ActorOf(Props.Create(() => new PlayerActorValidator()));
 
-            foreach (var item in playersPassed)
-            {
-                identity.Tell(new PlayerValidatorRequest(item));
+            Player player = new Player { FirstName = firstName, LastName = lastName, NickName = nickName, Age = age, Sex = sex, IsDeleted = isDeleted };
 
-                var result = ExpectMsg<PlayerValidatorResponse>().Success;
+            identity.Tell(new PlayerValidatorRequest(player));
 
-                Assert.True(result);
-            }
+            var result = ExpectMsg<PlayerValidatorResponse>().Success;
+
+            Assert.True(result);
         }
 
         [Fact]
