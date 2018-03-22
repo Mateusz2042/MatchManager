@@ -39,6 +39,7 @@ namespace Application.Actors
                 var players = _playerRepo.Find(notDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted));
 
                 var response = new GetAllPlayersResponse(players);
+
                 Sender.Tell(response);
                 //Sender.Tell(new GetAllPlayersResponse(Enumerable.Empty<GetPlayerItem>()));
             }

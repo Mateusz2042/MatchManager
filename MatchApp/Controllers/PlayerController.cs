@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Actor.Dsl;
 using Application.Actors;
 using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
+using Hangfire;
 using MatchManager.Enums;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Cors;
@@ -24,6 +26,13 @@ namespace MatchApp.Controllers
         public PlayerController()
         {
             _playerActor = ActorModelWrapper.PlayerActor;
+            BackgroundJob.Schedule(() => GetAllPlayers(), TimeSpan.FromHours(8));
+            RecurringJob.AddOrUpdate(() => GetAllPlayers(), " 5 * * * * ");
+        }
+
+        public void TestHangfire()
+        {
+            Console.WriteLine(Thread.CurrentThread.Name);
         }
 
         [ResponseCache(Duration = 60)]
@@ -31,6 +40,8 @@ namespace MatchApp.Controllers
         public async Task<GetAllPlayersResponse> GetAllPlayers()
         {
             //var actorRef = _actorSystem.ActorOf(Props.Create<PlayerActor>());
+
+            BackgroundJob.Schedule(() => TestHangfire(), TimeSpan.FromSeconds(30));
 
             var request = new GetAllPlayersRequest();
 

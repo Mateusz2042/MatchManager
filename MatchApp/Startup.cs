@@ -9,6 +9,8 @@ using Akka.Routing;
 using Application.Actors;
 using Autofac;
 using DotNETCore.Repository.Mongo;
+using Hangfire;
+using Hangfire.Mongo;
 using MatchApp.Settings;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +38,9 @@ namespace MatchApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddHangfire(config =>
+            config.UseMongoStorage("mongodb://localhost:27017/MatchDatabase", "MatchDatabase"));
 
             services.AddCors(options =>
             {
@@ -112,6 +117,11 @@ namespace MatchApp
             });
 
             app.UseCors("AllowApi");
+
+            //GlobalConfiguration.Configuration.UseMongoStorage("mongodb://localhost:27017/MatchDatabase", "MatchDatabase");
+
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
         }
     }
 }
