@@ -51,6 +51,21 @@
           "lib/netstandard1.6/Akka.DI.Core.dll": {}
         }
       },
+      "Akka.Remote/1.3.5": {
+        "type": "package",
+        "dependencies": {
+          "Akka": "1.3.5",
+          "DotNetty.Handlers": "0.4.6",
+          "Google.Protobuf": "3.3.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.6/Akka.Remote.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/Akka.Remote.dll": {}
+        }
+      },
       "Autofac/4.6.2": {
         "type": "package",
         "dependencies": {
@@ -129,6 +144,90 @@
           "lib/netcoreapp1.1/DotNetCore.MongoDB.Repository.dll": {}
         }
       },
+      "DotNetty.Buffers/0.4.6": {
+        "type": "package",
+        "dependencies": {
+          "DotNetty.Common": "0.4.6",
+          "NETStandard.Library": "1.6.1",
+          "System.Diagnostics.Contracts": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/DotNetty.Buffers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotNetty.Buffers.dll": {}
+        }
+      },
+      "DotNetty.Codecs/0.4.6": {
+        "type": "package",
+        "dependencies": {
+          "DotNetty.Buffers": "0.4.6",
+          "DotNetty.Common": "0.4.6",
+          "DotNetty.Transport": "0.4.6",
+          "NETStandard.Library": "1.6.1",
+          "System.Diagnostics.Contracts": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/DotNetty.Codecs.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotNetty.Codecs.dll": {}
+        }
+      },
+      "DotNetty.Common/0.4.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "1.1.1",
+          "NETStandard.Library": "1.6.1",
+          "System.Diagnostics.Contracts": "4.3.0",
+          "System.Net.NetworkInformation": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/DotNetty.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotNetty.Common.dll": {}
+        }
+      },
+      "DotNetty.Handlers/0.4.6": {
+        "type": "package",
+        "dependencies": {
+          "DotNetty.Buffers": "0.4.6",
+          "DotNetty.Codecs": "0.4.6",
+          "DotNetty.Common": "0.4.6",
+          "DotNetty.Transport": "0.4.6",
+          "NETStandard.Library": "1.6.1",
+          "System.Diagnostics.Contracts": "4.3.0",
+          "System.Globalization.Extensions": "4.3.0",
+          "System.Net.Security": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/DotNetty.Handlers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotNetty.Handlers.dll": {}
+        }
+      },
+      "DotNetty.Transport/0.4.6": {
+        "type": "package",
+        "dependencies": {
+          "DotNetty.Buffers": "0.4.6",
+          "DotNetty.Common": "0.4.6",
+          "NETStandard.Library": "1.6.1",
+          "System.Diagnostics.Contracts": "4.3.0",
+          "System.Diagnostics.StackTrace": "4.3.0",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Net.Primitives": "4.3.0",
+          "System.Net.Sockets": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/DotNetty.Transport.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotNetty.Transport.dll": {}
+        }
+      },
       "FluentValidation/7.5.2": {
         "type": "package",
         "dependencies": {
@@ -141,6 +240,31 @@
         },
         "runtime": {
           "lib/netstandard2.0/FluentValidation.dll": {}
+        }
+      },
+      "Google.Protobuf/3.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.IO": "4.1.0",
+          "System.Linq": "4.1.0",
+          "System.Linq.Expressions": "4.1.0",
+          "System.ObjectModel": "4.0.12",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.0/Google.Protobuf.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Google.Protobuf.dll": {}
         }
       },
       "Hangfire.AspNetCore/1.6.17": {
@@ -3117,21 +3241,13 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/10.0.2": {
+      "Newtonsoft.Json/11.0.1": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.3.0",
-          "NETStandard.Library": "1.6.1",
-          "System.ComponentModel.TypeConverter": "4.3.0",
-          "System.Runtime.Serialization.Formatters": "4.3.0",
-          "System.Runtime.Serialization.Primitives": "4.3.0",
-          "System.Xml.XmlDocument": "4.3.0"
-        },
         "compile": {
-          "lib/netstandard1.3/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
       "Newtonsoft.Json.Bson/1.0.1": {
@@ -4801,22 +4917,6 @@
           "lib/netstandard1.3/System.Runtime.Numerics.dll": {}
         }
       },
-      "System.Runtime.Serialization.Formatters/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Serialization.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.3/System.Runtime.Serialization.Formatters.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.4/System.Runtime.Serialization.Formatters.dll": {}
-        }
-      },
       "System.Runtime.Serialization.Json/4.0.2": {
         "type": "package",
         "dependencies": {
@@ -5171,6 +5271,24 @@
           }
         }
       },
+      "System.ServiceProcess.ServiceController/4.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceProcess.ServiceController.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceProcess.ServiceController.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.ServiceProcess.ServiceController.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Spatial/5.8.2": {
         "type": "package",
         "compile": {
@@ -5454,7 +5572,7 @@
           "System.Xml.ReaderWriter": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Xml.XmlDocument.dll": {}
+          "ref/netstandard1.3/_._": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
@@ -5617,6 +5735,19 @@
         "lib/netstandard1.6/Akka.DI.Core.xml"
       ]
     },
+    "Akka.Remote/1.3.5": {
+      "sha512": "BTN4wTo7PUPjK0xKIMyI/RTSflTtA6xzE3gNOKNJ+qq1TziusuBFN1fyI3iHlCjbpnnP7WMwukEHKG7PSM/tbA==",
+      "type": "package",
+      "path": "akka.remote/1.3.5",
+      "files": [
+        "akka.remote.1.3.5.nupkg.sha512",
+        "akka.remote.nuspec",
+        "lib/net45/Akka.Remote.dll",
+        "lib/net45/Akka.Remote.xml",
+        "lib/netstandard1.6/Akka.Remote.dll",
+        "lib/netstandard1.6/Akka.Remote.xml"
+      ]
+    },
     "Autofac/4.6.2": {
       "sha512": "wKI7F6+n45gqfq0T8FuB3hFzaCkuegiFo5in6uB1y2Ai9ZYcjue8yqk3yzyNEwBDS7AyvlTUGSoNovwpUuKqTw==",
       "type": "package",
@@ -5671,6 +5802,71 @@
         "lib/netstandard1.5/DotNetCore.MongoDB.Repository.dll"
       ]
     },
+    "DotNetty.Buffers/0.4.6": {
+      "sha512": "GDHnG1IRS3EQsBGvPdUo160QT83DCWLWFR/VNy9DPeZhqiGifTv4ZmuY8tHhsdg/MkDj4rCrMfc9q522T5bLew==",
+      "type": "package",
+      "path": "dotnetty.buffers/0.4.6",
+      "files": [
+        "dotnetty.buffers.0.4.6.nupkg.sha512",
+        "dotnetty.buffers.nuspec",
+        "lib/net45/DotNetty.Buffers.dll",
+        "lib/net45/DotNetty.Buffers.xml",
+        "lib/netstandard1.3/DotNetty.Buffers.dll",
+        "lib/netstandard1.3/DotNetty.Buffers.xml"
+      ]
+    },
+    "DotNetty.Codecs/0.4.6": {
+      "sha512": "Z4Ac4PVf7Ei1YaYuy2B5GaIJL3qp/sFe1DkPJrR7rTGkDPef9/Xwxb8Cstoot1WoIPYctwTtRca+KkhgpbzMDw==",
+      "type": "package",
+      "path": "dotnetty.codecs/0.4.6",
+      "files": [
+        "dotnetty.codecs.0.4.6.nupkg.sha512",
+        "dotnetty.codecs.nuspec",
+        "lib/net45/DotNetty.Codecs.dll",
+        "lib/net45/DotNetty.Codecs.xml",
+        "lib/netstandard1.3/DotNetty.Codecs.dll",
+        "lib/netstandard1.3/DotNetty.Codecs.xml"
+      ]
+    },
+    "DotNetty.Common/0.4.6": {
+      "sha512": "OMjr/3aZTuRxCkabDcFXoubQ3f8RIrh6gm/L1qORgttPkYyo49wRG+jx88YYevPlrqu1tHj4Yo43Zr7sUspsjQ==",
+      "type": "package",
+      "path": "dotnetty.common/0.4.6",
+      "files": [
+        "dotnetty.common.0.4.6.nupkg.sha512",
+        "dotnetty.common.nuspec",
+        "lib/net45/DotNetty.Common.dll",
+        "lib/net45/DotNetty.Common.xml",
+        "lib/netstandard1.3/DotNetty.Common.dll",
+        "lib/netstandard1.3/DotNetty.Common.xml"
+      ]
+    },
+    "DotNetty.Handlers/0.4.6": {
+      "sha512": "NXviHztem/DDzHEV7dLsWhYTjjTIDWgy4eW2A7wd6m2HgZG4xohTM17impRvDCVUsBCTmUM/6E44Ke8EHD4MqA==",
+      "type": "package",
+      "path": "dotnetty.handlers/0.4.6",
+      "files": [
+        "dotnetty.handlers.0.4.6.nupkg.sha512",
+        "dotnetty.handlers.nuspec",
+        "lib/net45/DotNetty.Handlers.dll",
+        "lib/net45/DotNetty.Handlers.xml",
+        "lib/netstandard1.3/DotNetty.Handlers.dll",
+        "lib/netstandard1.3/DotNetty.Handlers.xml"
+      ]
+    },
+    "DotNetty.Transport/0.4.6": {
+      "sha512": "gp6Zsxw065yxJKiP0tZ8rblR7wfJms27ALRmf2XO3dCwDheV3ZdP08MPyu+4wkuOD6n0BNJzmxJq50u8XOhasA==",
+      "type": "package",
+      "path": "dotnetty.transport/0.4.6",
+      "files": [
+        "dotnetty.transport.0.4.6.nupkg.sha512",
+        "dotnetty.transport.nuspec",
+        "lib/net45/DotNetty.Transport.dll",
+        "lib/net45/DotNetty.Transport.xml",
+        "lib/netstandard1.3/DotNetty.Transport.dll",
+        "lib/netstandard1.3/DotNetty.Transport.xml"
+      ]
+    },
     "FluentValidation/7.5.2": {
       "sha512": "AQMyeK9eP0+EKBsBuO6RhAiTmyTC32is6EX+cAMBOSCMvExeohtg3vNM1xUoenpb1mjwZfuoJXLz7QfiC7Bn2A==",
       "type": "package",
@@ -5686,6 +5882,19 @@
         "lib/netstandard1.6/FluentValidation.xml",
         "lib/netstandard2.0/FluentValidation.dll",
         "lib/netstandard2.0/FluentValidation.xml"
+      ]
+    },
+    "Google.Protobuf/3.3.0": {
+      "sha512": "W0TsIYM2ED9dc/FgdbdtP68vUP1JdbwaFscG3DeVtJNlfm8A/ozjAT0H3dWIk0jJd9Zcx6B7XZ1LYERF8PqqJA==",
+      "type": "package",
+      "path": "google.protobuf/3.3.0",
+      "files": [
+        "google.protobuf.3.3.0.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net45/Google.Protobuf.dll",
+        "lib/net45/Google.Protobuf.xml",
+        "lib/netstandard1.0/Google.Protobuf.dll",
+        "lib/netstandard1.0/Google.Protobuf.xml"
       ]
     },
     "Hangfire.AspNetCore/1.6.17": {
@@ -8824,10 +9033,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/10.0.2": {
-      "sha512": "iwElSU2IXmwGvytJsezyDML2ZWDkG2JzTYzlU/BNlmzMdlmRvbnwITsGGY74gwVEpDli1UdOLkMT7/3jxWvXzA==",
+    "Newtonsoft.Json/11.0.1": {
+      "sha512": "pNN4l+J6LlpIvHOeNdXlwxv39NPJ2B5klz+Rd2UQZIx30Squ5oND1Yy3wEAUoKn0GPUj6Yxt9lxlYWQqfZcvKg==",
       "type": "package",
-      "path": "newtonsoft.json/10.0.2",
+      "path": "newtonsoft.json/11.0.1",
       "files": [
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
@@ -8842,13 +9051,14 @@
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wpa81+wp8/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wpa81+wp8/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.xml",
-        "newtonsoft.json.10.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec",
-        "tools/install.ps1"
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.11.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec"
       ]
     },
     "Newtonsoft.Json.Bson/1.0.1": {
@@ -12573,33 +12783,6 @@
         "system.runtime.numerics.nuspec"
       ]
     },
-    "System.Runtime.Serialization.Formatters/4.3.0": {
-      "sha512": "G/i60di9UBd8/FS7mE5a8DDIyvYg5Ue2RjGrXdd5wVHMj+ceGofW4i7uJwmNWAeu+1+hat9sVIIHpnUsrJ47Xw==",
-      "type": "package",
-      "path": "system.runtime.serialization.formatters/4.3.0",
-      "files": [
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Runtime.Serialization.Formatters.dll",
-        "lib/netstandard1.4/System.Runtime.Serialization.Formatters.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/System.Runtime.Serialization.Formatters.dll",
-        "ref/netstandard1.3/System.Runtime.Serialization.Formatters.dll",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.runtime.serialization.formatters.4.3.0.nupkg.sha512",
-        "system.runtime.serialization.formatters.nuspec"
-      ]
-    },
     "System.Runtime.Serialization.Json/4.0.2": {
       "sha512": "+7DIJhnKYgCzUgcLbVTtRQb2l1M0FP549XFlFkQM5lmNiUBl44AfNbx4bz61xA8PzLtlYwfmif4JJJW7MPPnjg==",
       "type": "package",
@@ -13183,6 +13366,40 @@
         "runtimes/win/lib/netstandard1.3/System.Security.SecureString.dll",
         "system.security.securestring.4.0.0.nupkg.sha512",
         "system.security.securestring.nuspec"
+      ]
+    },
+    "System.ServiceProcess.ServiceController/4.4.1": {
+      "sha512": "Czibmma7KWCUiNm3o2YG+fDuxksOKiWBCjTKZSJ+JBLwFnoslcyzAFenU0g4Y0kNY/98f2COMx0EUiSBXoLLzw==",
+      "type": "package",
+      "path": "system.serviceprocess.servicecontroller/4.4.1",
+      "files": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.ServiceProcess.ServiceController.dll",
+        "lib/netstandard1.4/System.ServiceProcess.ServiceController.dll",
+        "lib/netstandard2.0/System.ServiceProcess.ServiceController.dll",
+        "ref/net461/System.ServiceProcess.ServiceController.dll",
+        "ref/net461/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/System.ServiceProcess.ServiceController.dll",
+        "ref/netstandard1.4/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/de/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/es/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/fr/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/it/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/ja/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/ko/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/ru/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/zh-hans/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard1.4/zh-hant/System.ServiceProcess.ServiceController.xml",
+        "ref/netstandard2.0/System.ServiceProcess.ServiceController.dll",
+        "ref/netstandard2.0/System.ServiceProcess.ServiceController.xml",
+        "runtimes/win/lib/net461/System.ServiceProcess.ServiceController.dll",
+        "runtimes/win/lib/netstandard1.5/System.ServiceProcess.ServiceController.dll",
+        "runtimes/win/lib/netstandard2.0/System.ServiceProcess.ServiceController.dll",
+        "system.serviceprocess.servicecontroller.4.4.1.nupkg.sha512",
+        "system.serviceprocess.servicecontroller.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Spatial/5.8.2": {
@@ -14292,6 +14509,7 @@
     ".NETCoreApp,Version=v2.0": [
       "Akka >= 1.3.5",
       "Akka.DI.AutoFac >= 1.3.0",
+      "Akka.Remote >= 1.3.5",
       "Application >= 1.0.0",
       "Autofac >= 4.6.2",
       "Hangfire.AspNetCore >= 1.6.17",
@@ -14302,7 +14520,9 @@
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
       "MongoDB.Driver >= 2.5.0",
-      "Swashbuckle.AspNetCore >= 2.3.0"
+      "Newtonsoft.Json >= 11.0.1",
+      "Swashbuckle.AspNetCore >= 2.3.0",
+      "System.ServiceProcess.ServiceController >= 4.4.1"
     ]
   },
   "packageFolders": {
@@ -14364,6 +14584,10 @@
             "target": "Package",
             "version": "[1.3.0, )"
           },
+          "Akka.Remote": {
+            "target": "Package",
+            "version": "[1.3.5, )"
+          },
           "Autofac": {
             "target": "Package",
             "version": "[4.6.2, )"
@@ -14397,9 +14621,17 @@
             "target": "Package",
             "version": "[2.5.0, )"
           },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[11.0.1, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[2.3.0, )"
+          },
+          "System.ServiceProcess.ServiceController": {
+            "target": "Package",
+            "version": "[4.4.1, )"
           }
         },
         "imports": [

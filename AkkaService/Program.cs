@@ -1,5 +1,9 @@
-﻿using PeterKottas.DotNetCore.WindowsService;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using PeterKottas.DotNetCore.WindowsService;
 using System;
+using System.IO;
+using System.Text;
 
 namespace AkkaService
 {

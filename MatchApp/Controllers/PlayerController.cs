@@ -30,18 +30,18 @@ namespace MatchApp.Controllers
             RecurringJob.AddOrUpdate(() => GetAllPlayers(), " 5 * * * * ");
         }
 
-        public void TestHangfire()
-        {
-            Console.WriteLine(Thread.CurrentThread.Name);
-        }
+        //public void TestHangfire()
+        //{
+        //    Console.WriteLine(Thread.CurrentThread.Name);
+        //}
 
         [ResponseCache(Duration = 60)]
         [HttpGet]
         public async Task<GetAllPlayersResponse> GetAllPlayers()
         {
             //var actorRef = _actorSystem.ActorOf(Props.Create<PlayerActor>());
-
-            BackgroundJob.Schedule(() => TestHangfire(), TimeSpan.FromSeconds(30));
+           
+            //BackgroundJob.Schedule(() => TestHangfire(), TimeSpan.FromSeconds(30));
 
             var request = new GetAllPlayersRequest();
 

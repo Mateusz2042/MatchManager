@@ -6,6 +6,7 @@ using Akka.Actor;
 using Application.Actors;
 using Application.Messages.Match.MatchRequest;
 using Application.Messages.Match.MatchResponse;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace MatchApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/Match")]
+    [EnableCors("AllowApi")]
     public class MatchController : Controller
     {
         private IActorRef _matchActor;

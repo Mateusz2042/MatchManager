@@ -7,6 +7,7 @@ using Application.Actors;
 using Application.Messages.Team.TeamRequest;
 using Application.Messages.Team.TeamResponse;
 using MatchManager.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace MatchApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/Team")]
+    [EnableCors("AllowApi")]
     public class TeamController : Controller
     {
         private IActorRef _teamActor;
