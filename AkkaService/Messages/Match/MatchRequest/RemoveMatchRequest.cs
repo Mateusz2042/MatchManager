@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AkkaService.Messages.Match.MatchRequest
+{
+    public class RemoveMatchRequest
+    {
+        public string Id { get; set; }
+
+        public RemoveMatchRequest(string id)
+        {
+            Id = id;
+        }
+    }
+}
