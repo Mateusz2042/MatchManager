@@ -107,22 +107,6 @@ namespace MatchApp
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;
             ActorModelWrapper.MatchActor = matchActor;
-
-            //services.Configure<SettingsConnection>(options =>
-            //{
-            //    options.ConnectionString
-            //        = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-            //    options.Database
-            //        = Configuration.GetSection("MongoConnection:Database").Value;
-            //});
-
-            //List<ServiceController> listServices = new List<ServiceController>();
-
-            //foreach (ServiceController service in ServiceController.GetServices())
-            //{
-            //    listServices.Add(service);
-            //}
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -144,8 +128,6 @@ namespace MatchApp
             });
 
             app.UseCors("AllowApi");
-
-            //GlobalConfiguration.Configuration.UseMongoStorage("mongodb://localhost:27017/MatchDatabase", "MatchDatabase");
 
             app.UseHangfireServer();
             app.UseHangfireDashboard();

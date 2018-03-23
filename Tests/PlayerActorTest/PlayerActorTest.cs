@@ -66,14 +66,5 @@ namespace Tests.PlayerActorTest
 
             Assert.Equal(expected, result);
         }
-
-        [Fact]
-        public void Bool()
-        {
-            if (6 % 2 == 0)
-            {
-                Assert.True(true);
-            }
-        }
     }
 }

@@ -54,8 +54,6 @@ namespace AkkaService
 
             var system = ActorSystem.Create("RemoteActorSystem", config);
 
-            //------------------------------------
-
             var propsPlayer = Props.Create<PlayerActor>().WithRouter(new RoundRobinPool(10));
             var propsTeam = Props.Create<TeamActor>().WithRouter(new RoundRobinPool(10));
             var propsMatch = Props.Create<MatchActor>().WithRouter(new RoundRobinPool(10));
@@ -63,10 +61,6 @@ namespace AkkaService
             var playerActor = system.ActorOf(propsPlayer, "playerActor");
             var teamActor = system.ActorOf(propsTeam, "teamActor");
             var matchActor = system.ActorOf(propsMatch, "matchActor");
-
-            //ActorModelWrapper.PlayerActor = playerActor;
-            //ActorModelWrapper.TeamActor = teamActor;
-            //ActorModelWrapper.MatchActor = matchActor;
         }
 
         public void Stop()
