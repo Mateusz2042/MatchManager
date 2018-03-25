@@ -5,8 +5,6 @@ using Application.Actors;
 using Microsoft.Extensions.Configuration;
 using PeterKottas.DotNetCore.WindowsService.Base;
 using PeterKottas.DotNetCore.WindowsService.Interfaces;
-using Serilog;
-using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;

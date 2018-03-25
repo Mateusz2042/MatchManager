@@ -1,0 +1,4 @@
+2018-03-26 00:01:00.591 +02:00 [Information] GetAllPlayers
+2018-03-26 00:02:18.073 +02:00 [Information] GetAllPlayers
+2018-03-26 00:03:49.703 +02:00 [Information] GetAllPlayers
+2018-03-26 00:10:21.033 +02:00 [Information] GetAllPlayers

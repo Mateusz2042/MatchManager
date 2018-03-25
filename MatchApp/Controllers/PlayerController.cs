@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Actor.Dsl;
+using AkkaService;
 using Application.Actors;
 using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
@@ -24,6 +25,7 @@ namespace MatchApp.Controllers
     public class PlayerController : Controller
     {
         private IActorRef _playerActor;
+        Configuration con = new Configuration();
 
         public PlayerController()
         {
@@ -36,7 +38,7 @@ namespace MatchApp.Controllers
         [HttpGet]
         public async Task<GetAllPlayersResponse> GetAllPlayers()
         {
-            Log.Information("GetAllPlayers");
+            con.Logger.Information("GetAllPlayers");
 
             var request = new GetAllPlayersRequest();
 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PeterKottas.DotNetCore.WindowsService;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.IO;
 using System.Text;

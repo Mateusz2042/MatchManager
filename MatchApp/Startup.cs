@@ -9,6 +9,8 @@ using Akka.Configuration;
 using Akka.DI.AutoFac;
 using Akka.DI.Core;
 using Akka.Routing;
+using AkkaService;
+using Application;
 using Application.Actors;
 using Autofac;
 using DotNETCore.Repository.Mongo;
@@ -109,14 +111,16 @@ namespace MatchApp
             ActorModelWrapper.TeamActor = teamActor;
             ActorModelWrapper.MatchActor = matchActor;
 
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            // Add this line:
-            .WriteTo.RollingFile(
-                Path.Combine("Logs\\log-{Date}.txt"))
+            var configurationSerilog = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configurationSerilog)
                 .CreateLogger();
+
+            logger.Information("xd");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
