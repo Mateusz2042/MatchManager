@@ -14,6 +14,7 @@ using Autofac;
 using DotNETCore.Repository.Mongo;
 using Hangfire;
 using Hangfire.Mongo;
+using MatchApp.Controllers;
 using MatchApp.Settings;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +25,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PeterKottas.DotNetCore.WindowsService.Base;
+using PeterKottas.DotNetCore.WindowsService.Interfaces;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace MatchApp
@@ -98,15 +101,13 @@ namespace MatchApp
 
             var timeOut = TimeSpan.FromSeconds(30);
 
-
-
             var playerActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/playerActor").ResolveOne(timeOut);
             var teamActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/teamActor").ResolveOne(timeOut);
             var matchActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/matchActor").ResolveOne(timeOut);
-            
-            ActorModelWrapper.PlayerActor = playerActor;
-            ActorModelWrapper.TeamActor = teamActor;
-            ActorModelWrapper.MatchActor = matchActor;
+
+            //ActorModelWrapper.PlayerActor = playerActor;
+            //ActorModelWrapper.TeamActor = teamActor;
+            //ActorModelWrapper.MatchActor = matchActor;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

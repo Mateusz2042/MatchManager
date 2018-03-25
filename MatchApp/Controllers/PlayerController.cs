@@ -23,9 +23,9 @@ namespace MatchApp.Controllers
     {
         private IActorRef _playerActor;
 
-        public PlayerController()
+        public PlayerController(IActorRef playerActor)
         {
-            _playerActor = ActorModelWrapper.PlayerActor;
+            _playerActor = playerActor;
             BackgroundJob.Schedule(() => GetAllPlayers(), TimeSpan.FromHours(8));
             RecurringJob.AddOrUpdate(() => GetAllPlayers(), " 5 * * * * ");
         }

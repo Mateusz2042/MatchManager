@@ -1,7 +1,10 @@
 ﻿using Akka.Actor;
 using Akka.Configuration;
+using Akka.DI.AutoFac;
+using Akka.DI.Core;
 using Akka.Routing;
 using Application.Actors;
+using Autofac;
 using Microsoft.Extensions.Configuration;
 using PeterKottas.DotNetCore.WindowsService.Base;
 using PeterKottas.DotNetCore.WindowsService.Interfaces;
@@ -52,15 +55,23 @@ namespace AkkaService
                 }
             }");
 
+            var builderAutoFac = new Autofac.ContainerBuilder();
+            builderAutoFac.RegisterType<PlayerActor>();
+            builderAutoFac.RegisterType<TeamActor>();
+            builderAutoFac.RegisterType<MatchActor>();
+            var container = builderAutoFac.Build();
+
             var system = ActorSystem.Create("RemoteActorSystem", config);
 
-            var propsPlayer = Props.Create<PlayerActor>().WithRouter(new RoundRobinPool(10));
-            var propsTeam = Props.Create<TeamActor>().WithRouter(new RoundRobinPool(10));
-            var propsMatch = Props.Create<MatchActor>().WithRouter(new RoundRobinPool(10));
+            var resolver = new AutoFacDependencyResolver(container, system);
 
-            var playerActor = system.ActorOf(propsPlayer, "playerActor");
-            var teamActor = system.ActorOf(propsTeam, "teamActor");
-            var matchActor = system.ActorOf(propsMatch, "matchActor");
+            //var propsPlayer = Props.Create<PlayerActor>().WithRouter(new RoundRobinPool(10));
+            //var propsTeam = Props.Create<TeamActor>().WithRouter(new RoundRobinPool(10));
+            //var propsMatch = Props.Create<MatchActor>().WithRouter(new RoundRobinPool(10));
+
+            var playerActor = system.ActorOf(resolver.Create<PlayerActor>().WithRouter(new RoundRobinPool(10)), "playerActor");
+            var teamActor = system.ActorOf(resolver.Create<TeamActor>().WithRouter(new RoundRobinPool(10)), "teamActor");
+            var matchActor = system.ActorOf(resolver.Create<MatchActor>().WithRouter(new RoundRobinPool(10)), "matchActor");
         }
 
         public void Stop()
