@@ -16,6 +16,7 @@ using Hangfire;
 using Hangfire.Mongo;
 using MatchApp.Settings;
 using MatchManager.Models;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +25,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Serilog;
+using Serilog.Events;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace MatchApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
         }
@@ -98,8 +101,6 @@ namespace MatchApp
 
             var timeOut = TimeSpan.FromSeconds(30);
 
-
-
             var playerActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/playerActor").ResolveOne(timeOut);
             var teamActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/teamActor").ResolveOne(timeOut);
             var matchActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/matchActor").ResolveOne(timeOut);
@@ -107,6 +108,15 @@ namespace MatchApp
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;
             ActorModelWrapper.MatchActor = matchActor;
+
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            // Add this line:
+            .WriteTo.RollingFile(
+                Path.Combine("Logs\\log-{Date}.txt"))
+                .CreateLogger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

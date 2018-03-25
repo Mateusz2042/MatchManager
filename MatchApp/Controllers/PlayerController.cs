@@ -13,6 +13,8 @@ using MatchManager.Enums;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace MatchApp.Controllers
 {
@@ -34,6 +36,8 @@ namespace MatchApp.Controllers
         [HttpGet]
         public async Task<GetAllPlayersResponse> GetAllPlayers()
         {
+            Log.Information("GetAllPlayers");
+
             var request = new GetAllPlayersRequest();
 
             return await _playerActor.Ask<GetAllPlayersResponse>(request);

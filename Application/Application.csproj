@@ -9,6 +9,7 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="DotNetCore.MongoDB.Repository" Version="1.0.2.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

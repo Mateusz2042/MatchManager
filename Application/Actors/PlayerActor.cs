@@ -7,6 +7,7 @@ using DotNETCore.Repository.Mongo;
 using MatchManager.Enums;
 using MatchManager.Models;
 using MongoDB.Driver;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
