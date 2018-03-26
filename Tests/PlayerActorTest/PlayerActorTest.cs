@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Tests.TestDataGenerator;
+using Application.Messages.Player.PlayerRequest;
 
 namespace Tests.PlayerActorTest
 {
@@ -39,21 +40,6 @@ namespace Tests.PlayerActorTest
             Assert.True(result);
         }
 
-        [Fact]
-        public void CreatePlayerActorTestFailed()
-        {
-            var identity = Sys.ActorOf(Props.Create(() => new PlayerActorValidator()));
-
-            foreach (var item in playersFailed)
-            {
-                identity.Tell(new PlayerValidatorRequest(item));
-
-                var result = ExpectMsg<PlayerValidatorResponse>().Success;
-
-                Assert.False(result);
-            }
-        }
-
         [Theory]
         [ClassData(typeof(TestDataGenerator.TestDataGenerator))]
         public void CreatePlayerActorTestPassedVer2(Player player, bool expected)
@@ -65,6 +51,21 @@ namespace Tests.PlayerActorTest
             var result = ExpectMsg<PlayerValidatorResponse>().Success;
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void SerilogGetAllPlayersPassed()
+        {
+            var identity = Sys.ActorOf(Props.Create(() => new PlayerActorValidator()));
+
+            foreach (var item in playersFailed)
+            {
+                identity.Tell(new PlayerValidatorRequest(item));
+
+                var result = ExpectMsg<PlayerValidatorResponse>().Success;
+
+                Assert.False(result);
+            }
         }
     }
 }
