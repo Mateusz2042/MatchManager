@@ -9,7 +9,6 @@ using Akka.Configuration;
 using Akka.DI.AutoFac;
 using Akka.DI.Core;
 using Akka.Routing;
-using AkkaService;
 using Application;
 using Application.Actors;
 using Autofac;
@@ -25,10 +24,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Serilog;
-using Serilog.Events;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace MatchApp
@@ -97,6 +93,8 @@ namespace MatchApp
                         hostname = localhost
                     }
                 }
+                loglevel=INFO,  
+                loggers=[""Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog""]
             }");
 
             var system = ActorSystem.Create("ActorSystem", configHocon);
@@ -110,17 +108,6 @@ namespace MatchApp
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;
             ActorModelWrapper.MatchActor = matchActor;
-
-            var configurationSerilog = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build();
-
-            var logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configurationSerilog)
-                .CreateLogger();
-
-            logger.Information("xd");
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

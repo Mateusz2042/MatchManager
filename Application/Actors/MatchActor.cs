@@ -1,4 +1,6 @@
 ﻿using Akka.Actor;
+using Akka.Event;
+using Akka.Logger.Serilog;
 using Application.Messages.Match.MatchRequest;
 using Application.Messages.Match.MatchResponse;
 using Application.Messages.Team.TeamResponse;
@@ -16,6 +18,7 @@ namespace Application.Actors
     {
         private readonly IRepository<Match> _matchRepo;
         private readonly IRepository<Team> _teamRepo;
+        private readonly ILoggingAdapter _logger = Context.GetLogger<SerilogLoggingAdapter>();
 
         public MatchActor()
         {
@@ -40,10 +43,12 @@ namespace Application.Actors
 
                 var response = new GetAllMatchesResponse(matches);
                 Sender.Tell(response);
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get All Matches");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get all Matches: {0}", ex);
                 throw;
             }
         }
@@ -63,10 +68,12 @@ namespace Application.Actors
 
                 var response = new GetMatchByIdResponse(match);
                 Sender.Tell(response);
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get Match by Id: {0}", request.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get Match by id: {0} : {1}", request.Id, ex);
                 throw;
             }
         }
@@ -89,17 +96,20 @@ namespace Application.Actors
 
                     var response = new CreateMatchResponse(true);
                     Sender.Tell(response);
+                    _logger.Info("Create Match successfull: {0} {1}", request.IdFirstTeam, request.IdSecondTeam);
                 }
                 else
                 {
                     var response = new CreateMatchResponse(false);
                     Sender.Tell(response);
+                    _logger.Error("Couldn't create Match: {0} {1}: All fields are required", request.IdFirstTeam, request.IdSecondTeam);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new CreateMatchResponse(false);
                 Sender.Tell(response);
+                _logger.Error("Couldn't create Match: {0} {1}: {2}", request.IdFirstTeam, request.IdSecondTeam, ex.Message);
             }
         }
 
@@ -117,11 +127,14 @@ namespace Application.Actors
 
                 var response = new RemoveMatchResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Remove Match successfull: {0} {1}", match.FirstTeam, match.SecondTeam);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new RemoveMatchResponse(false);
                 Sender.Tell(response);
+                _logger.Error("Couldn't remove Match: {0}:", request.Id, ex.Message);
             }
         }
 
@@ -140,11 +153,15 @@ namespace Application.Actors
                 _matchRepo.Replace(match);
                 var response = new EditMatchResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Edit Match successfull: {0} {1}", match.FirstTeam, match.SecondTeam);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new EditMatchResponse(false);
                 Sender.Tell(response);
+
+                _logger.Error("Couldn't edit Match: {0}: {1}", request.Id, ex.Message);
             }
         }
 
@@ -174,17 +191,22 @@ namespace Application.Actors
 
                     var response = new CreateRandomMatchResponse(true);
                     Sender.Tell(response);
+
+                    _logger.Info("Create Random Match successfull: {0}", request.DateTimeMatch);
                 }
                 else
                 {
                     var response = new CreateRandomMatchResponse(false);
                     Sender.Tell(response);
+
+                    _logger.Info("Couldn't create Random Match: {0}: All fields are required", request.DateTimeMatch);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new CreateRandomMatchResponse(false);
                 Sender.Tell(response);
+                _logger.Info("Couldn't create Random Match: {0}: {1}", request.DateTimeMatch, ex.Message);
             }
         }
 

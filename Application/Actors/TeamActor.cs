@@ -1,4 +1,6 @@
 ﻿using Akka.Actor;
+using Akka.Event;
+using Akka.Logger.Serilog;
 using Application.Messages.Team.TeamRequest;
 using Application.Messages.Team.TeamResponse;
 using Application.Specifications.TeamSpecifications;
@@ -15,6 +17,7 @@ namespace Application.Actors
     {
         private readonly IRepository<Team> _teamRepo;
         private readonly IRepository<Player> _playerRepo;
+        private readonly ILoggingAdapter _logger = Context.GetLogger<SerilogLoggingAdapter>();
 
         public TeamActor()
         {
@@ -38,10 +41,12 @@ namespace Application.Actors
 
                 var response = new GetAllTeamsResponse(teams);
                 Sender.Tell(response);
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get All Teams");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get all Teams: {0}", ex.Message);
                 throw;
             }
         }
@@ -61,10 +66,12 @@ namespace Application.Actors
 
                 var response = new GetTeamByIdResponse(player);
                 Sender.Tell(response);
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get Team by Id: {0}", request.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get Team by id: {0} : {1}", request.Id, ex.Message);
                 throw;
             }
         }
@@ -79,6 +86,8 @@ namespace Application.Actors
                     {
                         var response = new CreateTeamResponse(false);
                         Sender.Tell(response);
+
+                        _logger.Error("Couldn't create Team: {0}: This name is exists", request.NameTeam);
                     }
                     else
                     {
@@ -92,18 +101,25 @@ namespace Application.Actors
 
                         var response = new CreateTeamResponse(true);
                         Sender.Tell(response);
+
+                        _logger.Info("Create Team successfull: {0}", request.NameTeam);
                     }
                 }
                 else
                 {
                     var response = new CreateTeamResponse(false);
                     Sender.Tell(response);
+
+                    _logger.Error("Couldn't create Team: {0} {1}: All fields are required", request.NameTeam);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new CreateTeamResponse(false);
                 Sender.Tell(response);
+
+                _logger.Error("Couldn't create Team: {0} {1}: ", request.NameTeam, ex.Message);
+
             }
         }
 
@@ -121,11 +137,15 @@ namespace Application.Actors
 
                 var response = new RemoveTeamResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Remove Team successfull: {0} {1}", team.NameTeam);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new RemoveTeamResponse(false);
                 Sender.Tell(response);
+
+                _logger.Error("Couldn't remove Team by id: {0}: {1}", request.Id, ex.Message);
             }
         }
 
@@ -142,11 +162,15 @@ namespace Application.Actors
                 _teamRepo.Replace(team);
                 var response = new EditTeamResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Edit Team successfull: {0} {1}", team.NameTeam);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new EditTeamResponse(false);
                 Sender.Tell(response);
+
+                _logger.Error("Couldn't Team by id: {0}: {1}", request.Id, ex.Message);
             }
         }
 

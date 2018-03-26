@@ -1,2 +1,0 @@
-2018-03-25 23:58:21.534 +02:00 [Information] GetAllPlayers
-2018-03-25 23:58:55.785 +02:00 [Information] GetAllPlayers

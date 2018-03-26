@@ -15,5 +15,3 @@ C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Applica
 C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\Application.pdb
 C:\Users\user\source\repos\MatchManager\MatchApp\obj\Debug\netcoreapp2.0\MatchApp.csproj.CopyComplete
 C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\appsettings.json
-C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\AkkaService.dll
-C:\Users\user\source\repos\MatchManager\MatchApp\bin\Debug\netcoreapp2.0\AkkaService.pdb

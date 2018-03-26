@@ -1,4 +1,6 @@
 ﻿using Akka.Actor;
+using Akka.Event;
+using Akka.Logger.Serilog;
 using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
 using Application.Specifications.PlayerSpecifications;
@@ -22,6 +24,7 @@ namespace Application.Actors
     public class PlayerActor: ReceiveActor // utworzenie PlayerActora
     {
         private readonly IRepository<Player> _playerRepo;
+        private readonly ILoggingAdapter _logger = Context.GetLogger<SerilogLoggingAdapter>();
 
         public PlayerActor()
         {
@@ -46,10 +49,12 @@ namespace Application.Actors
 
                 Sender.Tell(response);
                 //Sender.Tell(new GetAllPlayersResponse(Enumerable.Empty<GetPlayerItem>()));
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get All Players");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get all Players: {0}", ex.Message);
                 throw;
             }
         }
@@ -69,10 +74,12 @@ namespace Application.Actors
 
                 var response = new GetPlayerByIdResponse(player);
                 Sender.Tell(response);
-            }
-            catch (Exception)
-            {
 
+                _logger.Info("Get Player by Id: {0}", request.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get Player by id: {0} : {1}", request.Id, ex.Message);
                 throw;
             }
         }
@@ -100,17 +107,21 @@ namespace Application.Actors
 
                     var response = new CreatePlayerResponse(true);
                     Sender.Tell(response);
+
+                    _logger.Info("Create Player successfull: {0} {1}", request.FirstName, request.LastName);
                 }
                 else
                 {
                     var response = new CreatePlayerResponse(false);
                     Sender.Tell(response);
+                    _logger.Error("Couldn't create Player: {0} {1}: Are fields are required", request.FirstName, request.LastName);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new CreatePlayerResponse(false);
                 Sender.Tell(response);
+                _logger.Error("Couldn't create Player: {0} {1}: {2}", request.FirstName, request.LastName, ex.Message);
             }
         }
 
@@ -128,11 +139,14 @@ namespace Application.Actors
 
                 var response = new RemovePlayerResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Remove Player successfull: {0} {1}", player.FirstName, player.LastName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new RemovePlayerResponse(false);
                 Sender.Tell(response);
+                _logger.Error("Couldn't remove Player by id: {0}: {1}", request.Id, ex.Message);
             }
         }
 
@@ -155,11 +169,15 @@ namespace Application.Actors
                 _playerRepo.Replace(player);
                 var response = new EditPlayerResponse(true);
                 Sender.Tell(response);
+
+                _logger.Info("Edit Player successfull: {0} {1}", player.FirstName, player.LastName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var response = new EditPlayerResponse(false);
                 Sender.Tell(response);
+
+                _logger.Error("Couldn't Player by id: {0}: {1}", request.Id, ex.Message);
             }
         }
 

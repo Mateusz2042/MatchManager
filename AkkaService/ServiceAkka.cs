@@ -5,6 +5,7 @@ using Application.Actors;
 using Microsoft.Extensions.Configuration;
 using PeterKottas.DotNetCore.WindowsService.Base;
 using PeterKottas.DotNetCore.WindowsService.Interfaces;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,10 @@ namespace AkkaService
         {
             this.StartBase();
 
+            var configurationSerilog = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
             var builder = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
                                     .AddJsonFile("appsettings.json");
@@ -50,7 +55,16 @@ namespace AkkaService
                         hostname = localhost
                     }
                 }
+                loglevel=INFO,  
+                loggers=[""Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog""]
             }");
+
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configurationSerilog)
+                .MinimumLevel.Information()
+                .CreateLogger();
+
+            Serilog.Log.Logger = logger;
 
             var system = ActorSystem.Create("RemoteActorSystem", config);
 
