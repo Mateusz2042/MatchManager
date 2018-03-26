@@ -104,7 +104,7 @@ namespace MatchApp
             var playerActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/playerActor").ResolveOne(timeOut);
             var teamActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/teamActor").ResolveOne(timeOut);
             var matchActor = await system.ActorSelection("akka.tcp://RemoteActorSystem@localhost:8090/user/matchActor").ResolveOne(timeOut);
-            
+
             ActorModelWrapper.PlayerActor = playerActor;
             ActorModelWrapper.TeamActor = teamActor;
             ActorModelWrapper.MatchActor = matchActor;

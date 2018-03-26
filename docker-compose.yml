@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  akkaservice:
+    image: akkaservice
+    build:
+      context: .
+      dockerfile: AkkaService/Dockerfile
+
+  matchappui:
+    image: matchappui
+    build:
+      context: .
+      dockerfile: MatchAppUI/Dockerfile
+
