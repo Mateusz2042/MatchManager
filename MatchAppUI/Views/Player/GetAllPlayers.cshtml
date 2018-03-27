@@ -1,63 +1,72 @@
-﻿
+﻿@model IEnumerable<MatchManager.Models.Player>
+
 @{
     ViewData["Title"] = "GetAllPlayers";
 }
 
-<div>
-    Text
-</div>
-<div>
-    <a id="retrieve-players" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Get all Players</a>
-</div>
+<h2>GetAllPlayers</h2>
 
-<div id="display-players">
-    
-</div>
-
-<div class="carousel carousel-slider">
-    <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/800/400/food/1"></a>
-    <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/800/400/food/2"></a>
-    <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/800/400/food/3"></a>
-    <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/800/400/food/4"></a>
-</div>
-
-<script type="text/javascript">
-    $('.carousel.carousel-slider').carousel({
-        fullWidth: false
-    });
-
-</script>
-
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-<script>
-
-    $(document).ready(function () {
-
-        $('#retrieve-players').click(function () {
-            $(this).hide();
-            var displayResources = $('#display-players');
-
-            displayResources.text('Loading data from JSON source...');
-
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:53766/api/Player",
-                success: function (result) {
-                    console.log(result);
-                    var output = "<table><thead><tr><th>Id</th><th>FirstName</th><th>LastName</th><th>NickName</th><th>Age</th><th>Sex</th></thead><tbody>";
-                    for (var i in result.players) {
-                        output += "<tr><td>" + result.players[i].id + "</td><td>" + result.players[i].firstName + "</td><td>" + result.players[i].lastName + "</td><td>" + result.players[i].nickName + "</td><td>" + result.players[i].age + "</td><td>" + result.players[i].sex + "</td></tr>";
-                    }
-                    output += "</tbody></table>";
-
-                    displayResources.html(output);
-                    $("table").addClass("table");
-                }
-            });
-
-        });
-    });
-
-</script>
+<p>
+    <button onclick="window.location.href='/Player/CreatePlayer'" class="waves-effect waves-light btn pulse"><i class="material-icons right">create</i>Create User</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Delete
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td><button type="button" onclick="location.href='@Url.Action("EditPlayer", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">edit</i></button></td>
+            <td><button type="button" onclick="location.href='@Url.Action("DetailsPlayer", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">details</i></button></td>
+            <td><button type="button" onclick="location.href='@Url.Action("DeletePlayer", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></button></td>
+        </tr>
+}
+    </tbody>
+</table>

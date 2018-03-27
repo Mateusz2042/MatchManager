@@ -1,35 +1,40 @@
 ﻿@model MatchManager.Models.Player
 
 @{
-    ViewData["Title"] = "CreatePlayer";
+    ViewData["Title"] = "EditPlayer";
 }
 
-<h2>CreatePlayer</h2>
+<h2>EditPlayer</h2>
 
 <h4>Player</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreatePlayer">
+        <form asp-action="EditPlayer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" id="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" id="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NickName" class="control-label"></label>
-                <input asp-for="NickName" id="NickName" class="form-control" />
+                <input asp-for="NickName" class="form-control" />
                 <span asp-validation-for="NickName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" id="Age" class="form-control" />
+                <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,7 +46,7 @@
                 <span asp-validation-for="Sex" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" id="Save" value="Create" class="btn btn-default" />
+                <input type="submit" id="Save" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
@@ -50,29 +55,3 @@
 <div>
     <a asp-action="GetAllPlayers">Back to List</a>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#Save").click(function () {
-            var player = new Object();
-            player.firstName = $('#FirstName').val();
-            player.lastName = $('#LastName').val();
-            player.nickName = $('#NickName').val();
-            player.age = $('#Age').val();
-            player.sex = $('#Sex').val();
-
-            $.ajax({
-                url: 'http://localhost:53766/api/Player',
-                type: 'POST',
-                dataType: 'json',
-                data: player,
-                success: function (data, textStatus, xhr) {
-                    console.log(data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
-                }
-            });
-        });
-    });
-</script>
