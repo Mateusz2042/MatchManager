@@ -91,6 +91,9 @@ namespace MatchApp
                     dot-netty.tcp {
                         port = 0 # bound to a dynamic port assigned by the OS
                         hostname = localhost
+
+                        bind-hostname = 192.168.1.163
+                        bind-port = 0
                     }
                 }
                 loglevel=INFO,  

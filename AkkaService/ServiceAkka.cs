@@ -53,6 +53,9 @@ namespace AkkaService
                     dot-netty.tcp {
                         port = 8090 #bound to a specific port
                         hostname = localhost
+
+                        bind-hostname = 192.168.1.163
+                        bind-port = 2552
                     }
                 }
                 loglevel=INFO,  

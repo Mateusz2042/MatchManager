@@ -22,7 +22,7 @@ namespace MatchAppUI.Controllers
 
         public IActionResult GetAllPlayers()
         {
-            return View(deserialize().Players);
+            return View();
         }
 
         public IActionResult CreatePlayer()

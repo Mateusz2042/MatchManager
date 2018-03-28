@@ -6,12 +6,13 @@ using Serilog.Events;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace AkkaService
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             ServiceRunner<ServiceAkka>.Run(config =>
             {
