@@ -15,6 +15,7 @@ using Autofac;
 using DotNETCore.Repository.Mongo;
 using Hangfire;
 using Hangfire.Mongo;
+using Infrastructure.Redis;
 using MatchApp.Settings;
 using MatchManager.Models;
 using Microsoft.AspNetCore;
@@ -65,6 +66,14 @@ namespace MatchApp
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowApi"));
             });
+
+            services.AddTransient<IRediseDataAgent, RedisDataAgent>();
+
+            //services.AddDistributedRedisCache(option =>
+            //{
+            //    option.Configuration = "127.0.0.1";
+            //    option.InstanceName = "matchapp";
+            //});
 
             //ContainerBuilder builder = new ContainerBuilder();
             //var repoPlayer = builder.RegisterGeneric(typeof(Repository<>))

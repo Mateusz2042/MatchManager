@@ -10,6 +10,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using MongoDB.Bson.Serialization;
 using System.Net;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MatchAppUI.Controllers
 {
