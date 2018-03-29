@@ -10,12 +10,15 @@ using Akka.Logger.Serilog;
 using Application.Actors;
 using Application.Messages.Player.PlayerRequest;
 using Application.Messages.Player.PlayerResponse;
+using Infrastructure.Redis;
 using Hangfire;
 using MatchManager.Enums;
 using MatchManager.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace MatchApp.Controllers
@@ -26,12 +29,14 @@ namespace MatchApp.Controllers
     public class PlayerController : Controller
     {
         private IActorRef _playerActor;
+        public readonly IRediseDataAgent _dataAgent;
 
-        public PlayerController()
+        public PlayerController(IRediseDataAgent dataAgent)
         {
             _playerActor = ActorModelWrapper.PlayerActor;
             BackgroundJob.Schedule(() => GetAllPlayers(), TimeSpan.FromHours(8));
             RecurringJob.AddOrUpdate(() => GetAllPlayers(), " 5 * * * * ");
+            _dataAgent = dataAgent;
         }
 
         [ResponseCache(Duration = 60)]
@@ -56,11 +61,45 @@ namespace MatchApp.Controllers
         [HttpGet("{id}")]
         public async Task<GetPlayerByIdResponse> GetPlayerById(string id)
         {
-            var request = new GetPlayerByIdRequest(id);
+            var playerId = _dataAgent.GetStringValue("playerId");
 
-            var result = await _playerActor.Ask<GetPlayerByIdResponse>(request);
+            if (!String.IsNullOrEmpty(playerId))
+            {
+                if (id == playerId)
+                {
+                    var playerById = _dataAgent.GetStringValue("playerById");
 
-            return result;
+                    var result = JsonConvert.DeserializeObject<GetPlayerByIdResponse>(playerById);
+
+                    return result;
+                }
+                else
+                {
+                    var request = new GetPlayerByIdRequest(id);
+
+                    var result = await _playerActor.Ask<GetPlayerByIdResponse>(request);
+
+                    var playerById = JsonConvert.SerializeObject(result);
+
+                    _dataAgent.SetStringValue("playerId", id);
+                    _dataAgent.SetStringValue("playerById", playerById);
+
+                    return result;
+                }
+            }
+            else
+            {
+                var request = new GetPlayerByIdRequest(id);
+
+                var result = await _playerActor.Ask<GetPlayerByIdResponse>(request);
+
+                var playerById = JsonConvert.SerializeObject(result);
+
+                _dataAgent.SetStringValue("playerId", id);
+                _dataAgent.SetStringValue("playerById", playerById);
+
+                return result;
+            }
         }
 
         [ResponseCache(Duration = 60)]
