@@ -7,11 +7,11 @@ namespace Application.Messages.Match.MatchResponse
 {
     public class GetAllMatchesResponse
     {
-        public ICollection<GetMatchItem> Teams { get; }
+        public ICollection<GetMatchItem> Matches { get; }
 
-        public GetAllMatchesResponse(IEnumerable<GetMatchItem> teams)
+        public GetAllMatchesResponse(IEnumerable<GetMatchItem> matches)
         {
-            Teams = teams.ToList();
+            Matches = matches.ToList();
         }
     }
 

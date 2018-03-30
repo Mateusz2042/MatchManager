@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "DetailsTeam";
+}
+
+<h2>Details Team</h2>
+
+<body onload="GetTeam();return false;">
+    <input type="hidden" id="txtEmpid" value="@ViewBag.TeamId">
+
+    <div id="divResult">
+
+    </div>
+
+    <div>
+        <a asp-action="GetAllTeams">Back to List</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+        function GetTeam() {
+            jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+            $.ajax({
+                url: 'http://localhost:53766/api/Team/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowTeam(data.team);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function ShowTeam(team) {
+            if (team != null) {
+                var strResult = "<table><th>Id</th><th>NameTeam</th><th>FirstMember</th><th>SecondMember</th>";
+                strResult += "<tr><td>" + team.id + "</td><td> " + team.nameTeam + "</td><td> " + team.firstMember.firstName + " " + team.firstMember.lastName + "</td><td> " + team.secondMember.firstName + " " + team.secondMember.lastName + "</td></tr>";
+                strResult += "</table>";
+                $("#divResult").html(strResult);
+            }
+            else {
+                $("#divResult").html("No Results To Display");
+            }
+        }
+
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        }); 
+
+    </script>
+</body>

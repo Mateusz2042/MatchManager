@@ -33,8 +33,6 @@ namespace MatchAppUI.Controllers
 
         public IActionResult EditPlayer(string id)
         {
-            //ViewBag.PlayerId = id;
-
             return View(deserialize(id));
         }
 

@@ -39,7 +39,6 @@ namespace MatchApp.Controllers
         [HttpPost]
         public async Task<CreateMatchResponse> CreateMatch(string idFirstTeam, string idSecondTeam, string dateTimeMatch)
         {
-
             var request = new CreateMatchRequest(idFirstTeam, idSecondTeam, dateTimeMatch);
 
             return await _matchActor.Ask<CreateMatchResponse>(request);

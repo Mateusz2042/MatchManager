@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MatchManager.Models.Match>
+
+@{
+    ViewData["Title"] = "GetAllMatches";
+}
+
+<h2>GetAllMatches</h2>
+
+<p>
+    <button onclick="window.location.href='/Match/CreateMatch'" class="waves-effect waves-light btn pulse"><i class="material-icons right">create</i>Create Match</button>
+    <button onclick="window.location.href='/Match/CreateRandomMatch'" class="waves-effect waves-light btn"><i class="material-icons right">create</i>Create Random Match</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                FirstTeam
+            </th>
+            <th>
+                SecondTeam
+            </th>
+            <th>
+                Result
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeMatch)
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelIitem => item.Id)
+            </td>
+            <th>
+                @Html.DisplayFor(modelIitem => item.FirstTeam.NameTeam)
+            </th>
+            <th>
+                @Html.DisplayFor(modelIitem => item.SecondTeam.NameTeam)
+            </th>
+            <td>
+                @Html.DisplayFor(itmodelIitemem => item.ScoreOfFirstTeam) : @Html.DisplayFor(modelItem => item.ScoreOfSecondTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeMatch)
+            </td>
+            <td><button type="button" onclick="location.href='@Url.Action("EditMatch", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">edit</i></button></td>
+            <td><button type="button" onclick="location.href='@Url.Action("DetailsMatch", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">details</i></button></td>
+            <td><button type="button" onclick="location.href='@Url.Action("DeleteMatch", new { id = item.Id })'" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></button></td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,87 @@
+﻿@model MatchManager.Models.Match
+
+@{
+    ViewData["Title"] = "EditMatch";
+}
+
+<h2>EditMatch</h2>
+
+<h2>EditMatch</h2>
+
+<h4>EditMatchRequest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMatch">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control disabled" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstTeam.Id" class="control-label">IdFirstTeam</label>
+                <input asp-for="FirstTeam.Id" id="IdFirstTeam" class="form-control" />
+                <span asp-validation-for="FirstTeam.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondTeam.Id" class="control-label">IdSecondTeam</label>
+                <input asp-for="SecondTeam.Id" id="IdSecondTeam" class="form-control" />
+                <span asp-validation-for="SecondTeam.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTimeMatch" class="control-label"></label>
+                <input asp-for="DateTimeMatch" id="DateTimeMatch" class="form-control" />
+                <span asp-validation-for="DateTimeMatch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScoreOfFirstTeam" class="control-label"></label>
+                <input asp-for="ScoreOfFirstTeam" id="ScoreOfFirstTeam" class="form-control" />
+                <span asp-validation-for="ScoreOfFirstTeam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScoreOfSecondTeam" class="control-label"></label>
+                <input asp-for="ScoreOfSecondTeam" id="ScoreOfSecondTeam" class="form-control" />
+                <span asp-validation-for="ScoreOfSecondTeam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a id="Save" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Edit</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllMatches">Back to List</a>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#Save").click(function () {
+            var match = new Object();
+            match.id = $('#Id').val();
+            match.idFirstTeam = $('#IdFirstTeam').val();
+            match.idSecondTeam = $('#IdSecondTeam').val();
+            match.dateTimeMatch = $('#DateTimeMatch').val();
+            match.scoreOfFirstTeam = $('#ScoreOfFirstTeam').val();
+            match.scoreOfSecondTeam = $('#ScoreOfSecondTeam').val();
+            DateTimeMatch
+
+            $.ajax({
+                url: 'http://localhost:53766/api/Match/',
+                type: 'PUT',
+                dataType: 'json',
+                data: match,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    window.location.href = 'GetAllMatches/';
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+        });
+    });
+
+</script>

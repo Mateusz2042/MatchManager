@@ -1,0 +1,54 @@
+﻿@model Application.Messages.Match.MatchRequest.CreateRandomMatchRequest
+
+@{
+    ViewData["Title"] = "CreateRandomMatch";
+}
+
+<h2>CreateRandomMatch</h2>
+
+<h2>CreateMatch</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateMatch">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DateTimeMatch" class="control-label"></label>
+                <input asp-for="DateTimeMatch" id="DateTimeMatch" class="form-control" />
+                <span asp-validation-for="DateTimeMatch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a id="Save" class="waves-effect waves-light btn green"><i class="material-icons right">create</i>Create</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllMatches">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Save").click(function () {
+            var match = new Object();
+            match.dateTimeMatch = $('#DateTimeMatch').val();
+
+            $.ajax({
+                url: 'http://localhost:53766/CreateRandomMatch',
+                type: 'POST',
+                dataType: 'json',
+                data: match,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    window.location.href = 'GetAllMatches/';
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+        });
+    });
+</script>
+
+

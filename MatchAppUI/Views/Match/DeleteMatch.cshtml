@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Match";
+}
+
+<h2>Delete Match</h2>
+
+<body onload="GetMatch();return false;">
+
+    <input type="hidden" id="txtEmpid" value="@ViewBag.MatchId">
+
+    <div id="divResult">
+
+    </div>
+
+    <div>
+        <a asp-action="GetAllMatches">Back to List</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+        function GetMatch() {
+            jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+            $.ajax({
+                url: 'http://localhost:53766/api/Match/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowMatch(data.match);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function ShowMatch(match) {
+            if (match != null) {
+                var strResult = "<table><th>Id</th><th>FirstTeam</th><th>SecondTeam</th><th>DateTime</th><th>ScoreOfFirstTeam</th><th>ScoreOfSecondTeam</th>";
+                strResult += "<tr><td>" + match.id + "</td><td> " + match.firstTeam.nameTeam + "</td><td>" + match.secondTeam.nameTeam + "</td><td>" + match.dateTimeMatch + "</td><td>" + match.scoreOfFirstTeam + "</td><td>" + match.scoreOfSecondTeam + "</td><td><a onclick=\"DeleteMatch(); return false;\" class=\"waves - effect waves - light btn red\">Delete</a></td></tr>";
+                strResult += "</table>";
+                $("#divResult").html(strResult);
+            }
+            else {
+                $("#divResult").html("No Results To Display");
+            }
+        }
+
+        function DeleteMatch() {
+            //jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+
+            $.ajax({
+                url: 'http://localhost:53766/api/Match/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = 'GetAllMatches/';
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+    </script>
+</body>
