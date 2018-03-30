@@ -1,12 +1,13 @@
-﻿
-@{
-    ViewData["Title"] = "DeletePlayer";
+﻿@{
+    ViewData["Title"] = "EditPlayer";
 }
 
-<h2>Delete Player</h2>
+<h2>Edit Player</h2>
 
 <body onload="GetPlayer();return false;">
-
+    <div>
+        Text
+    </div>
     <input type="hidden" id="txtEmpid" value="@ViewBag.PlayerId">
 
     <div id="divResult">
@@ -37,30 +38,14 @@
         function ShowPlayer(player) {
             if (player != null) {
                 var strResult = "<table><th>Id</th><th>FirstName</th><th>LastName</th><th>NickName</th><th>Age</th>";
-                strResult += "<tr><td>" + player.id + "</td><td> " + player.firstName + "</td><td>" + player.lastName + "</td><td>" + player.nickName + "</td><td>" + player.age + "</td><td><a onclick=\"DeletePlayer(); return false;\" class=\"waves - effect waves - light btn\">Delete</a></td></tr>";
+
+                strResult += "<tr><td>" + player.id + "</td><td> " + player.firstName + "</td><td>" + player.lastName + "</td><td>" + player.nickName + "</td><td>" + player.age + "</td></tr>";
                 strResult += "</table>";
                 $("#divResult").html(strResult);
             }
             else {
                 $("#divResult").html("No Results To Display");
             }
-        }
-
-        function DeletePlayer() {
-            //jQuery.support.cors = true;
-            var id = $('#txtEmpid').val();
-
-            $.ajax({
-                url: 'http://localhost:53766/api/Player/' + id,
-                type: 'DELETE',
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    alert("Success");
-                },
-                error: function (x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-            });
         }
 
     </script>

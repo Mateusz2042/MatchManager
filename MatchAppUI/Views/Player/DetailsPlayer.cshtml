@@ -1,66 +1,48 @@
-﻿@model MatchManager.Models.Player
-
-@{
+﻿@{
     ViewData["Title"] = "DetailsPlayer";
 }
 
-<h2>DetailsPlayer</h2>
+<h2>Details Player</h2>
 
-<div>
-    <h4>Player</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NickName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NickName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="GetAllPlayers">Back to List</a>
-</div>
+<body onload="GetPlayer();return false;">
+    <input type="hidden" id="txtEmpid" value="@ViewBag.PlayerId">
+
+    <div id="divResult">
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+        function GetPlayer() {
+            jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+            $.ajax({
+                url: 'http://localhost:53766/api/Player/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowPlayer(data.player);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function ShowPlayer(player) {
+            if (player != null) {
+                var strResult = "<table><th>Id</th><th>FirstName</th><th>LastName</th><th>NickName</th><th>Age</th><th>Sex</th>";
+                strResult += "<tr><td>" + player.id + "</td><td> " + player.firstName + "</td><td>" + player.lastName + "</td><td>" + player.nickName + "</td><td>" + player.age + "</td><td>" + player.sex + "</td></tr>";
+                strResult += "</table>";
+                $("#divResult").html(strResult);
+            }
+            else {
+                $("#divResult").html("No Results To Display");
+            }
+        }
+
+    </script>
+</body>
