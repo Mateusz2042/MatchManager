@@ -43,7 +43,7 @@ namespace MatchAppUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Player}/{action=GetAllPlayers}");
+                    template: "{controller=Home}/{action=MainWindow}");
 
                 //routes.MapRoute(
                 //    name: "default",

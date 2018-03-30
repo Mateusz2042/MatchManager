@@ -10,6 +10,8 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="~/materialize/css/materialize.min.css" media="screen,projection" />
 
+    <link type="text/css" rel="stylesheet" href="~/css/site.css" />
+
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -27,19 +29,14 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="~/materialize/js/materialize.min.js"></script>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    
+
+    <nav id="colorNav" class="navbar navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MatchAppUI</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div class="nav-wrapper">
+                <a asp-area="" asp-controller="Home" asp-action="MainWindow">Home</a>
+                <span class="brand-logo center">Match Manager</span>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a asp-area="" asp-controller="Player" asp-action="GetAllPlayers">Players</a></li>
                     <li><a asp-area="" asp-controller="Team" asp-action="GetAllTeams">Teams</a></li>
                     <li><a asp-area="" asp-controller="Match" asp-action="GetAllMatches">Matches</a></li>
