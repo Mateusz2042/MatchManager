@@ -1,11 +1,12 @@
 ﻿
 @{
-    ViewData["Title"] = "DetailsTeam";
+    ViewData["Title"] = "DeleteTeam";
 }
 
-<h2>Details Team</h2>
+<h2>DeleteTeam</h2>
 
 <body onload="GetTeam();return false;">
+
     <input type="hidden" id="txtEmpid" value="@ViewBag.TeamId">
 
     <div id="divResult">
@@ -40,13 +41,31 @@
         function ShowTeam(team) {
             if (team != null) {
                 var strResult = "<table><th>Id</th><th>NameTeam</th><th>FirstMember</th><th>SecondMember</th>";
-                strResult += "<tr><td>" + team.id + "</td><td> " + team.nameTeam + "</td><td> " + team.firstMember.firstName + " " + team.firstMember.lastName + "</td><td> " + team.secondMember.firstName + " " + team.secondMember.lastName + "</td></tr>";
+                strResult += "<tr><td>" + team.id + "</td><td> " + team.nameTeam + "</td><td> " + team.firstMember.firstName + " " + team.firstMember.lastName + "</td><td> " + team.secondMember.firstName + " " + team.secondMember.lastName + "</td><td><a onclick=\"DeleteTeam(); return false;\" class=\"waves - effect waves - light btn red\">Delete</a></td></tr>";
                 strResult += "</table>";
                 $("#divResult").html(strResult);
             }
             else {
                 $("#divResult").html("No Results To Display");
             }
+        }
+
+        function DeleteTeam() {
+            jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+
+            $.ajax({
+                url: 'http://localhost:53766/api/Team/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = 'GetAllTeams/';
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
         }
 
     </script>

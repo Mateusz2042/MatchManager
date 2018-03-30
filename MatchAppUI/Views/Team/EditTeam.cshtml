@@ -1,0 +1,72 @@
+﻿@model MatchManager.Models.Team
+
+@{
+    ViewData["Title"] = "EditTeam";
+}
+
+<h2>EditTeam</h2>
+
+<h4>Team</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTeam">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" id="Id" class="form-control disabled" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameTeam" class="control-label"></label>
+                <input asp-for="NameTeam" id="NameTeam" class="form-control" />
+                <span asp-validation-for="NameTeam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstMember.Id" class="control-label">IdFirstMember</label>
+                <input asp-for="FirstMember.Id" id="IdFirstTeam" class="form-control" />
+                <span asp-validation-for="FirstMember.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondMember.Id" class="control-label">IdSecondMember</label>
+                <input asp-for="SecondMember.Id" id="IdSecondMember" class="form-control" />
+                <span asp-validation-for="SecondMember.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a id="Save" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Edit</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllTeams">Back to List</a>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#Save").click(function () {
+            var team = new Object();
+            team.id = $('#Id').val();
+            team.nameTeam = $('#NameTeam').val();
+            team.idFirstMember = $('#IdFirstTeam').val();
+            team.idSecondMember = $('#IdSecondMember').val();
+
+            $.ajax({
+                url: 'http://localhost:53766/api/Team/',
+                type: 'PUT',
+                dataType: 'json',
+                data: team,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    window.location.href = 'GetAllTeams/';
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+        });
+    });
+
+</script>

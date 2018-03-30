@@ -8,6 +8,11 @@ namespace MatchAppUI.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult MainWindow()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();

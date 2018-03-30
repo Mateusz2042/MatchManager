@@ -37,7 +37,7 @@ namespace Application.Actors
             {
                 var notDeleted = new GetTeamsNotDeletedSpecifications();
 
-                var teams = _teamRepo.FindAll().Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted));
+                var teams = _teamRepo.Find(notDeleted).Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted));
 
                 var response = new GetAllTeamsResponse(teams);
                 Sender.Tell(response);
