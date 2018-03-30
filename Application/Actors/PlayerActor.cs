@@ -160,6 +160,7 @@ namespace Application.Actors
 
                 //var player = mapper.Map<GetPlayerItem>(_playerRepo.Get(request.Player.Id));
 
+                player.Id = player.Id;
                 player.FirstName = request.FirstName;
                 player.LastName = request.LastName;
                 player.NickName = request.NickName;
