@@ -1,0 +1,103 @@
+﻿@model IEnumerable<MatchManager.Models.Player>
+
+@{
+    ViewData["Title"] = "GetFilterPlayers";
+}
+
+<body onload="GetPlayers();return false;">
+
+    <h2>Filter Players</h2>
+
+    <p>
+        <input placeholder="Filter text" id="filterText" type="text" style="width: 250px" onchange="Change();return false;">
+        <a id="retrieve-players" class="waves-effect waves-light btn"><i class="material-icons right">search</i>Filter</a>
+    </p>
+
+    <div id="display-players">
+
+    </div>
+
+</body>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+        function GetPlayers() {
+            jQuery.support.cors = true;
+            var id = $('#txtEmpid').val();
+            $.ajax({
+                url: 'http://localhost:53766/api/Player',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    ShowPlayers(data.players);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function ShowPlayers(players) {
+
+            var displayResources = $('#display-players');
+
+            displayResources.text('Loading data from JSON source...');
+
+            var output = "<table><thead><tr><th>Id</th><th>FirstName</th><th>LastName</th><th>NickName</th><th>Age</th><th>Sex</th></thead><tbody>";
+            for (var i in players) {
+                output += "<tr><td>" + players[i].id + "</td><td>" + players[i].firstName + "</td><td>" + players[i].lastName + "</td><td>" + players[i].nickName + "</td><td>" + players[i].age + "</td><td>" + players[i].sex + "</td></tr>";
+            }
+            output += "</tbody></table>";
+
+            displayResources.html(output);
+            $("table").addClass("table");
+        }
+
+        function Change() {
+
+            var Text = new Object();
+            Text.text = $('#filterText').val();
+
+            $.ajax({
+                url: 'http://localhost:53766/GetFilterPlayers',
+                type: 'POST',
+                dataType: 'json',
+                data: Text,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    ShowPlayers(data.players);
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#retrieve-players").click(function () {
+                var Text = new Object();
+                Text.text = $('#filterText').val();
+
+                $.ajax({
+                    url: 'http://localhost:53766/GetFilterPlayers',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: Text,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        ShowPlayers(data.players);
+
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                });
+            });
+        });
+
+    </script>

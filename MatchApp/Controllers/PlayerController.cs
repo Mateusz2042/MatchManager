@@ -49,6 +49,16 @@ namespace MatchApp.Controllers
         }
 
         [ResponseCache(Duration = 60)]
+        [Route("/GetFilterPlayers")]
+        [HttpPost]
+        public async Task<GetFilterPlayersResponse> GetFilterPlayers(string text)
+        {
+            var request = new GetFilterPlayersRequest(text);
+
+            return await _playerActor.Ask<GetFilterPlayersResponse>(request);
+        }
+
+        [ResponseCache(Duration = 60)]
         [HttpPost]
         public async Task<CreatePlayerResponse> CreatePlayer(string firstName, string lastName, string nickName, int age, Sex sex)
         {

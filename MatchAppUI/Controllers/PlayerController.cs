@@ -26,6 +26,11 @@ namespace MatchAppUI.Controllers
             return View(deserialize().Players);
         }
 
+        public IActionResult GetFilterPlayers()
+        {
+            return View();
+        }
+
         public IActionResult CreatePlayer()
         {
             return View();

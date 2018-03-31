@@ -21,7 +21,7 @@ using System.Threading;
 
 namespace Application.Actors
 {
-    public class PlayerActor: ReceiveActor // utworzenie PlayerActora
+    public class PlayerActor : ReceiveActor // utworzenie PlayerActora
     {
         private readonly IRepository<Player> _playerRepo;
         private readonly ILoggingAdapter _logger = Context.GetLogger<SerilogLoggingAdapter>();
@@ -35,6 +35,7 @@ namespace Application.Actors
             Receive<CreatePlayerRequest>(message => Handle(message));
             Receive<RemovePlayerRequest>(message => Handle(message));
             Receive<EditPlayerRequest>(message => Handle(message));
+            Receive<GetFilterPlayersRequest>(message => Handle(message));
         }
 
         private void Handle(GetAllPlayersRequest request)
@@ -55,6 +56,32 @@ namespace Application.Actors
             catch (Exception ex)
             {
                 _logger.Error("Could't get all Players: {0}", ex.Message);
+                throw;
+            }
+        }
+
+        private void Handle(GetFilterPlayersRequest request)
+        {
+            if (request.Text == null)
+            {
+                request.Text = String.Empty;
+            }
+
+            try
+            {
+                var notDeleted = new GetPlayersNotDeletedSpecifications();
+
+                var players = _playerRepo.Find(notDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted)).OrderBy(x => x.FirstName);
+
+                var response = new GetFilterPlayersResponse(players.Where(x => x.Id.Contains(request.Text) || x.FirstName.Contains(request.Text) || x.LastName.Contains(request.Text) || x.NickName.Contains(request.Text) || Convert.ToString(x.Age).Contains(request.Text) || Convert.ToString(x.Sex).Contains(request.Text)));
+
+                Sender.Tell(response);
+
+                _logger.Info("Get filter Players by: {0}", request.Text);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Could't get filter Players: {0}", ex.Message);
                 throw;
             }
         }
