@@ -4,67 +4,136 @@
     ViewData["Title"] = "EditTeam";
 }
 
-<h2>Edit Team</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditTeam">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" id="Id" class="form-control disabled" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameTeam" class="control-label"></label>
-                <input asp-for="NameTeam" id="NameTeam" class="form-control" />
-                <span asp-validation-for="NameTeam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstMember.Id" class="control-label">IdFirstMember</label>
-                <input asp-for="FirstMember.Id" id="IdFirstTeam" class="form-control" />
-                <span asp-validation-for="FirstMember.Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SecondMember.Id" class="control-label">IdSecondMember</label>
-                <input asp-for="SecondMember.Id" id="IdSecondMember" class="form-control" />
-                <span asp-validation-for="SecondMember.Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <a id="Save" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Edit</a>
-            </div>
-        </form>
-    </div>
-</div>
+<body onload="GetPlayers();return false;">
 
-<div>
-    <a asp-action="GetAllTeams">Back to List</a>
-</div>
+    <h2>Edit Team</h2>
+    <input asp-for="NameTeam" id="NameTeamOriginal" class="form-control hidden" />
+    <input asp-for="FirstMember.Id" id="FirstMemberId" class="form-control hidden" />
+    <input asp-for="FirstMember.FirstName" id="FirstMember1" class="form-control hidden" />
+    <input asp-for="FirstMember.LastName" id="FirstMember2" class="form-control hidden" />
+    <input asp-for="SecondMember.Id" id="SecondMemberId" class="form-control hidden" />
+    <input asp-for="SecondMember.FirstName" id="SecondMember1" class="form-control hidden" />
+    <input asp-for="SecondMember.LastName" id="SecondMember2" class="form-control hidden" />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditTeam">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" id="Id" class="form-control" disabled />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NameTeam" class="control-label"></label>
+                    <input asp-for="NameTeam" id="NameTeam" class="form-control" />
+                    <span asp-validation-for="NameTeam" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="divResult">
+
+                </div>
+                <div class="form-group" id="divResult2">
+
+                </div>
+                <div class="form-group">
+                    <a id="Save" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Edit</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="GetAllTeams">Back to List</a>
+    </div>
+
+</body>
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        $("#Save").click(function () {
-            var team = new Object();
-            team.id = $('#Id').val();
-            team.nameTeam = $('#NameTeam').val();
-            team.idFirstMember = $('#IdFirstTeam').val();
-            team.idSecondMember = $('#IdSecondMember').val();
+        $(document).ready(function () {
+            $("#Save").click(function () {
+                var team = new Object();
+                team.id = $('#Id').val();
+                team.nameTeam = $('#NameTeam').val();
+                team.idFirstMember = $('#IdFirstMember').val();
+                team.idSecondMember = $('#IdSecondMember').val();
 
-            $.ajax({
-                url: 'http://localhost:53766/api/Team/',
-                type: 'PUT',
-                dataType: 'json',
-                data: team,
-                success: function (data, textStatus, xhr) {
-                    console.log(data);
-                    window.location.href = 'GetAllTeams/';
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
+                if (team.idFirstMember == null) {
+                    team.idFirstMember = $('#FirstMemberId').val();
                 }
+                if (team.idSecondMember == null) {
+                    team.idSecondMember = $('#SecondMemberId').val();
+                }
+                if (team.nameTeam == null) {
+                    team.nameTeam = $('#NameTeamOriginal').val();
+                }
+
+                $.ajax({
+                    url: 'http://localhost:53766/api/Team/',
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: team,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        window.location.href = 'GetAllTeams/';
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                });
             });
         });
-    });
+
+        function GetPlayers() {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: 'http://localhost:53766/api/Player/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowPlayer(data.players);
+                    ShowPlayer2(data.players);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function ShowPlayer(players) {
+
+            var id = $('#FirstMemberId').val();
+            var name = $('#FirstMember1').val() + " " + $('#FirstMember2').val();
+
+            if (players != null) {
+                var strResult = "<label asp-for=\"IdFirstMember\" class=\"control-label\"></label><select asp-for=\"IdFirstMember\" id=\"IdFirstMember\" class=\"form-control\"><option value = \"" + id + "\" disabled selected>" + name + "</option>";
+                for (var i in players) {
+                    strResult += "<option value=\"" + players[i].id + "\">" + players[i].firstName + " " + players[i].lastName + "</option>";
+                }
+                strResult += "</select><span asp-validation-for=\"IdFirstMember\" class=\"text - danger\"></span>";
+                $("#divResult").html(strResult);
+            }
+            else {
+                $("#divResult").html("No Results To Display");
+            }
+        }
+
+        function ShowPlayer2(players) {
+
+            var id = $('#SecondMemberId').val();
+            var name = $('#SecondMember1').val() + " " + $('#SecondMember2').val();
+
+            if (players != null) {
+                var strResult = "<label asp-for=\"IdSecondMember\" class=\"control-label\"></label><select asp-for=\"IdSecondMember\" id=\"IdSecondMember\" class=\"form-control\"><option value = \"" + id + "\" disabled selected>" + name + "</option>";
+                for (var i in players) {
+                    strResult += "<option value=\"" + players[i].id + "\">" + players[i].firstName + " " + players[i].lastName + "</option>";
+                }
+                strResult += "</select><span asp-validation-for=\"IdSecondMember\" class=\"text - danger\"></span>";
+                $("#divResult2").html(strResult);
+            }
+            else {
+                $("#divResult2").html("No Results To Display");
+            }
+        }
 
 </script>

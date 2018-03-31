@@ -37,7 +37,7 @@ namespace Application.Actors
             {
                 var notDeleted = new GetTeamsNotDeletedSpecifications();
 
-                var teams = _teamRepo.Find(notDeleted).Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted));
+                var teams = _teamRepo.Find(notDeleted).Select(x => new GetTeamItem(x.Id, x.NameTeam, x.FirstMember, x.SecondMember, x.IsDeleted)).OrderBy(x => x.NameTeam);
 
                 var response = new GetAllTeamsResponse(teams);
                 Sender.Tell(response);
@@ -82,7 +82,7 @@ namespace Application.Actors
             {
                 if (!String.IsNullOrEmpty(request.NameTeam) || !String.IsNullOrEmpty(request.IdFirstMember) || !String.IsNullOrEmpty(request.IdSecondMember))
                 {
-                    if (_teamRepo.Any(x => x.NameTeam.Contains(request.NameTeam)))
+                    if (_teamRepo.Any(x => x.NameTeam.Contains(request.NameTeam) && !x.IsDeleted))
                     {
                         var response = new CreateTeamResponse(false);
                         Sender.Tell(response);
@@ -153,17 +153,27 @@ namespace Application.Actors
         {
             try
             {
-                var team = _teamRepo.Get(request.Id);
+                if (!String.IsNullOrEmpty(request.NameTeam) || !String.IsNullOrEmpty(request.IdFirstMember) || !String.IsNullOrEmpty(request.IdSecondMember))
+                {
+                    var team = _teamRepo.Get(request.Id);
 
-                team.NameTeam = request.NameTeam;
-                team.FirstMember = GetPlayerById(request.IdFirstMember);
-                team.SecondMember = GetPlayerById(request.IdSecondMember);
+                    team.NameTeam = request.NameTeam;
+                    team.FirstMember = GetPlayerById(request.IdFirstMember);
+                    team.SecondMember = GetPlayerById(request.IdSecondMember);
 
-                _teamRepo.Replace(team);
-                var response = new EditTeamResponse(true);
-                Sender.Tell(response);
+                    _teamRepo.Replace(team);
+                    var response = new EditTeamResponse(true);
+                    Sender.Tell(response);
 
-                _logger.Info("Edit Team successfull: {0} {1}", team.NameTeam);
+                    _logger.Info("Edit Team successfull: {0} {1}", team.NameTeam);
+                }
+                else
+                {
+                    var response = new CreateTeamResponse(false);
+                    Sender.Tell(response);
+
+                    _logger.Error("Couldn't create Team: {0}: All fields are required", request.NameTeam);
+                }
             }
             catch (Exception ex)
             {

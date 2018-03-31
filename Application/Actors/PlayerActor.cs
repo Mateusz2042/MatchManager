@@ -43,7 +43,7 @@ namespace Application.Actors
             {
                 var notDeleted = new GetPlayersNotDeletedSpecifications();
 
-                var players = _playerRepo.Find(notDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted));
+                var players = _playerRepo.Find(notDeleted).Select(x => new GetPlayerItem(x.Id, x.FirstName, x.LastName, x.NickName, x.Age, x.Sex, x.IsDeleted)).OrderBy(x => x.FirstName);
 
                 var response = new GetAllPlayersResponse(players);
 

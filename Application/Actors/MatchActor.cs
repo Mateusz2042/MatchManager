@@ -39,7 +39,7 @@ namespace Application.Actors
             {
                 var notDeleted = new GetMatchesNotDeletedSpecifications();
 
-                var matches = _matchRepo.Find(notDeleted).Select(x => new GetMatchItem(x.Id, x.FirstTeam, x.SecondTeam, x.DateTimeMatch, x.ScoreOfFirstTeam, x.ScoreOfSecondTeam, x.IsDeleted));
+                var matches = _matchRepo.Find(notDeleted).Select(x => new GetMatchItem(x.Id, x.FirstTeam, x.SecondTeam, x.DateTimeMatch, x.ScoreOfFirstTeam, x.ScoreOfSecondTeam, x.IsDeleted)).OrderBy(x => Convert.ToDateTime(x.DateTimeMatch));
 
                 var response = new GetAllMatchesResponse(matches);
                 Sender.Tell(response);

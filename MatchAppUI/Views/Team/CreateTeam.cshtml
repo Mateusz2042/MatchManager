@@ -3,38 +3,35 @@
 @{
     ViewData["Title"] = "CreateTeam";
 }
-
-<h2>Create new Team</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateTeam">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NameTeam" class="control-label"></label>
-                <input asp-for="NameTeam" id="NameTeam" class="form-control" />
-                <span asp-validation-for="NameTeam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdFirstMember" class="control-label"></label>
-                <input asp-for="IdFirstMember" id="IdFirstMember" class="form-control" />
-                <span asp-validation-for="IdFirstMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdSecondMember" class="control-label"></label>
-                <input asp-for="IdSecondMember" id="IdSecondMember" class="form-control" />
-                <span asp-validation-for="IdSecondMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <a id="Save" class="waves-effect waves-light btn green"><i class="material-icons right">create</i>Create</a>
-            </div>
-        </form>
+<body onload="GetPlayers();return false;">
+    <h2>Create new Team</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateTeam">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NameTeam" class="control-label"></label>
+                    <input asp-for="NameTeam" id="NameTeam" class="form-control" />
+                    <span asp-validation-for="NameTeam" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="divResult">
+                    
+                </div>
+                <div class="form-group" id="divResult2">
+                    
+                </div>
+                <div class="form-group">
+                    <a id="Save" class="waves-effect waves-light btn green"><i class="material-icons right">create</i>Create</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="GetAllTeams">Back to List</a>
-</div>
+    <div>
+        <a asp-action="GetAllTeams">Back to List</a>
+    </div>
+</body>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -59,4 +56,48 @@
             });
         });
     });
+
+    function GetPlayers() {
+        jQuery.support.cors = true;
+        $.ajax({
+            url: 'http://localhost:53766/api/Player/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                ShowPlayer(data.players);
+                ShowPlayer2(data.players);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+    function ShowPlayer(players) {
+        if (players != null) {
+            var strResult = "<label asp-for=\"IdFirstMember\" class=\"control-label\"></label><select asp-for=\"IdFirstMember\" id=\"IdFirstMember\" class=\"form-control\"><option value = \" \" disabled selected>--Choose--</option>";
+            for (var i in players) {
+                strResult += "<option value=\"" + players[i].id + "\">" + players[i].firstName + " " + players[i].lastName + "</option>";
+            }
+            strResult += "</select><span asp-validation-for=\"IdFirstMember\" class=\"text - danger\"></span>";
+            $("#divResult").html(strResult);
+        }
+        else {
+            $("#divResult").html("No Results To Display");
+        }
+    }
+
+    function ShowPlayer2(players) {
+        if (players != null) {
+            var strResult = "<label asp-for=\"IdSecondMember\" class=\"control-label\"></label><select asp-for=\"IdSecondMember\" id=\"IdSecondMember\" class=\"form-control\"><option value = \" \" disabled selected>--Choose--</option>";
+            for (var i in players) {
+                strResult += "<option value=\"" + players[i].id + "\">" + players[i].firstName + " " + players[i].lastName + "</option>";
+            }
+            strResult += "</select><span asp-validation-for=\"IdSecondMember\" class=\"text - danger\"></span>";
+            $("#divResult2").html(strResult);
+        }
+        else {
+            $("#divResult2").html("No Results To Display");
+        }
+    }
 </script>
